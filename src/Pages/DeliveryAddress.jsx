@@ -163,7 +163,7 @@ const DeliveryAddress = () => {
                 } cursor-pointer min-w-3.5 h-3.5 border rounded-full border-gray-300 `}
               ></p>
               <img
-                src="../../public/images/Easypaisa_Logo-removebg-preview.png
+                src="/images/Easypaisa_Logo-removebg-preview.png
             "
                 alt="easypaisa"
                 className="h-full"
