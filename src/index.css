@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: logoFont;
+    src: url(../public/Fonts/QurovaDEMO-Bold-BF67a5c637eed62.otf);
+}
+@font-face {
+    font-family: Rockybilly;
+    src: url(../public/Fonts/Rockybilly.ttf);
+}
+@font-face {
+    font-family: MuckleyBold;
+    src: url(../public/Fonts/MuckleyBold.ttf);
+}
+@font-face {
+    font-family: LoginFont;
+    src: url(../public/Fonts/Chillax-Variable.ttf);
+}
+
+
+
+
+.blackAddtoCart:hover .CartIcon {
+  animation: moveCart 0.6s 2 ease-in-out;
+}
+
+@keyframes moveCart {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(4px);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+/* Chrome, Safari, Edge */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+
+.profileOptions{
+background: rgba(255, 255, 255, 0);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(3.3px);
+-webkit-backdrop-filter: blur(3.3px);
+border: 1px solid rgba(255, 255, 255, 0.95);
+}
+.options:hover{
+background: rgba(255, 255, 255, 0.19);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(19px);
+-webkit-backdrop-filter: blur(19px);
+border: 1px solid rgba(255, 255, 255, 0.42);
+}
+
+
