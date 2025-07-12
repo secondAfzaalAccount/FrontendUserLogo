@@ -4,9 +4,16 @@ import { Link } from "react-router-dom";
 
 //product card----------------------
 
-const ProductDisplay = ({  id,  name,  price,  description,  category,  image,  quantity,  bestSeller,}) => {
-
-
+const ProductDisplay = ({
+  id,
+  name,
+  price,
+  description,
+  category,
+  image,
+  quantity,
+  bestSeller,
+}) => {
   return (
     <div className="max-w-sm w-full  rounded-2xl shadow-md overflow-hidden border hover:shadow-lg transition duration-300 p-4">
       <div className="w-full h-48  flex items-center justify-center overflow-hidden rounded-lg">
@@ -19,13 +26,13 @@ const ProductDisplay = ({  id,  name,  price,  description,  category,  image,  
 
       <div className="mt-4">
         <div className="flex justify-between items-start">
-          <h2 className="text-sm font-semibold text-gray-800 h-14 overflow-hidden ">
+          <h2 className="text-base font-medium text-gray-900 truncate">
             {name}
           </h2>
         </div>
 
         <div className="mt-4 flex flex-col md:flex-row gap-2 justify-between  items-center">
-          <span className="text-md font-semiboldbold font-[LoginFont] ">
+          <span className="text-lg font-semibold text-[var(--main-color)] tracking-wide">
             Rs.{Math.floor(price)}/-
           </span>
 

@@ -10,6 +10,10 @@ import { TfiClose } from "react-icons/tfi"; //icon
 import { CgProfile } from "react-icons/cg"; //icon
 import { CiBoxList } from "react-icons/ci"; //icon
 import { TbLogin } from "react-icons/tb"; //icon
+import { PiCardsThin } from "react-icons/pi"; //icon
+import { IoHomeOutline } from "react-icons/io5"; //icon 
+import { BsCreditCard2Front } from "react-icons/bs"; //icon
+import { PiPhoneTransferThin } from "react-icons/pi";//icon
 import { useDispatch, useSelector } from "react-redux";
 import { SEARCHINPUT } from "../Features/ProductSlice";
 
@@ -91,11 +95,11 @@ const Navbar = () => {
               <span
                 className={`${
                   profileOptions ? "absolute z-50" : "hidden"
-                } profileOptions div py-4 px-6 rounded-sm flex flex-col gap-2 absolute top-[30%] right-[100%]  `}
+                } profileOptions text-xl font-semibold md:font-medium div py-4 px-4 rounded-sm flex flex-col gap-2 absolute top-[30%] right-[100%]  `}
               >
                 <Link
                   onClick={() => setprofileOptions((prev) => !prev)}
-                  className={` options px-3 py-2 flex gap-4 justify-start items-center rounded-sm pointer-coarse text-balance hover:text-[var(--main-color)]`}
+                  className={` options px-3 py-2 flex gap-4  justify-start items-center rounded-sm pointer-coarse text-balance hover:text-[var(--main-color)]`}
                 >
                   <CgProfile /> Profile
                 </Link>
@@ -157,6 +161,7 @@ const Navbar = () => {
               menu ? "fixed" : "hidden"
             }  w-full h-screen py-4 px-2  absolute top-0 ring-0 bg-[var(--bg-color)] z-1000`}
           >
+            <h1 className="text-4xl font-bold text-gray-400 w-full pb-3 border-b-[1px] border-gray-300">MENU</h1>
             <div className="flex flex-col  w-full  ">
               <div className="flex justify-end items-end w-full px-10 py-4 ">
                 <RiCloseLargeFill
@@ -171,45 +176,46 @@ const Navbar = () => {
                   to={"/"}
                   onClick={() => setmenu((prev) => !prev)}
                   className={`${
-                    location.pathname === "/" ? "text-[var(--main-color)]" : ""
-                  } hover:text-black`}
+                    location.pathname === "/" ? "text-[var(--main-color)] text-2xl" : ""
+                  } hover:text-black  flex gap-6 justify-center items-center  `}
                 >
-                  Home
+                 <IoHomeOutline /><span>Home</span> 
                 </Link>
                 <Link
                   onClick={() => setmenu((prev) => !prev)}
                   to={"/Collections"}
                   className={`${
                     location.pathname === "/Collections"
-                      ? "text-[var(--main-color)]"
+                      ? "text-[var(--main-color)] text-2xl"
                       : ""
-                  } hover:text-black`}
+                  } hover:text-black flex gap-6 justify-center items-center   `}
                 >
-                  Collections
+                 <PiCardsThin /> <span>Collections</span>  
                 </Link>
                 <Link
                   onClick={() => setmenu((prev) => !prev)}
                   to={"/About"}
                   className={`${
                     location.pathname === "/About"
-                      ? "text-[var(--main-color)]"
+                      ? "text-[var(--main-color)] text-2xl"
                       : ""
-                  } hover:text-black`}
+                  } hover:text-black flex gap-6 justify-center items-center `}
                 >
-                  About
+                  <BsCreditCard2Front /><span>About</span> 
                 </Link>
                 <Link
                   onClick={() => setmenu((prev) => !prev)}
                   to={"/Contact"}
                   className={`${
                     location.pathname === "/Contact"
-                      ? "text-[var(--main-color)]"
+                      ? "text-[var(--main-color)] text-2xl"
                       : ""
-                  } hover:text-black`}
+                  } hover:text-black  flex gap-6 justify-center items-center  `}
                 >
-                  Contact
+                 <PiPhoneTransferThin /> <span>Contact</span> 
                 </Link>
               </div>
+              
             </div>
           </div>
         </div>

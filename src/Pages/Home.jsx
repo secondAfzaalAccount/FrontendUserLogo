@@ -14,8 +14,9 @@ const Home = () => {
           </h1>
           <h2></h2>
         </div>
+        
         {/* ⬅➡️ right */}
-        <div></div>
+        <div ></div>
       </div>
 
       {/* Latest Collections---------------- */}
