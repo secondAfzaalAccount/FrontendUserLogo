@@ -46,11 +46,10 @@ const Cart = () => {
             to={"/Collections"}
             className="absolute text-xl md:text-2xl  top-[5%] left-2 flex gap-2 justify-center items-center cursor-pointer hover:text-[var(--main-color)]"
           >
-            {" "}
-            <IoIosArrowRoundBack /> Back to Collection Page
+            <IoIosArrowRoundBack /> Contine Shopping
           </Link>
           <div className="w-full  h-[70vh] md:h-[90vh]  flex justify-center items-center ">
-            <h2>your Cart is empty ☹️</h2>
+            <h2 className="text-gray-400">your Cart is empty ☹️</h2>
           </div>
         </div>
       </>

@@ -176,7 +176,8 @@ const Navbar = () => {
                   to={"/"}
                   onClick={() => setmenu((prev) => !prev)}
                   className={`${
-                    location.pathname === "/" ? "text-[var(--main-color)] text-2xl" : ""
+                    location.pathname === "/" ? "text-[var(--main-color)] text-3xl"
+                      : "text-2xl"
                   } hover:text-black  flex gap-6 justify-center items-center  `}
                 >
                  <IoHomeOutline /><span>Home</span> 
@@ -186,8 +187,8 @@ const Navbar = () => {
                   to={"/Collections"}
                   className={`${
                     location.pathname === "/Collections"
-                      ? "text-[var(--main-color)] text-2xl"
-                      : ""
+                      ? "text-[var(--main-color)] text-3xl"
+                      : "text-2xl"
                   } hover:text-black flex gap-6 justify-center items-center   `}
                 >
                  <PiCardsThin /> <span>Collections</span>  
@@ -197,8 +198,8 @@ const Navbar = () => {
                   to={"/About"}
                   className={`${
                     location.pathname === "/About"
-                      ? "text-[var(--main-color)] text-2xl"
-                      : ""
+                      ? "text-[var(--main-color)] text-3xl"
+                      : "text-2xl"
                   } hover:text-black flex gap-6 justify-center items-center `}
                 >
                   <BsCreditCard2Front /><span>About</span> 
@@ -208,8 +209,8 @@ const Navbar = () => {
                   to={"/Contact"}
                   className={`${
                     location.pathname === "/Contact"
-                      ? "text-[var(--main-color)] text-2xl"
-                      : ""
+                      ? "text-[var(--main-color)] text-3xl"
+                      : "text-2xl"
                   } hover:text-black  flex gap-6 justify-center items-center  `}
                 >
                  <PiPhoneTransferThin /> <span>Contact</span> 
