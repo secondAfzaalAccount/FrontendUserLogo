@@ -68,6 +68,16 @@ const productSlice = createSlice({
     GrandTotalAmount: (state, action) => {
       state.GrandTotalAmount = action.payload;
     },
+    editSize: (state, action) => {
+      console.log(action.payload);
+      const item = state.Cart.find((i)=> i.id == action.payload.id)
+      if (item) {
+        item.Sizes = action.payload.size;
+      }
+      localStorage.setItem("Cart", JSON.stringify(state.Cart));
+
+
+    },
   },
 });
 
@@ -78,6 +88,7 @@ export const {
   incrementQty,
   decrementQty,
   deleteCartItem,
-  GrandTotalAmount
+  GrandTotalAmount,
+  editSize
 } = productSlice.actions;
 export default productSlice.reducer;

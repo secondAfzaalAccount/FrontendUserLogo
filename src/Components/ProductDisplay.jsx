@@ -41,7 +41,7 @@ const ProductDisplay = ({
             style={{
               boxShadow: "11px 11px 28px #c9cecf, -11px -11px 28px #ffffff",
             }}
-            className="buttonInsideCarD flex hover:font-semibold  cursor-pointer  text-xs md:text-sm justify-center items-center gap-2 rounded-[22px] whitespace-nowrap py-2 px-4  outline-0 hover:border-gray-500 border-[#ffffff00] border-[1px]    w-full "
+            className="buttonInsideCarD flex hover:font-semibold  cursor-pointer bg-gray-200 text-xs md:text-sm justify-center items-center gap-2 rounded-[22px] whitespace-nowrap py-2 px-4  outline-0 hover:border-gray-500 border-[#ffffff00] border-[1px]    w-full "
           >
             <CiShoppingCart className="hidden md:block" /> Add to Cart
           </Link>

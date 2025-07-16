@@ -5,8 +5,42 @@ import { BiArrowBack } from "react-icons/bi"; //icon
 import { CiShoppingCart } from "react-icons/ci";
 import { addToCart } from "../Features/ProductSlice";
 import { toast } from "react-toastify";
+import gsap from "gsap";
+import { cartIconRef } from "../Components/Navbar";
 
 const DetailProduct = () => {
+  const imgRef = useRef(null);
+//gsap
+  // const img = imgRef.current;
+  // const cart = cartIconRef.current;
+
+  // if (!img || !cart) return; // ✅ prevent error
+
+  // const imgRect = img.getBoundingClientRect();
+  // const cartRect = cart.getBoundingClientRect();
+
+  // const clone = img.cloneNode(true);
+  // clone.style.position = "fixed";
+  // clone.style.left = `${imgRect.left}px`;
+  // clone.style.top = `${imgRect.top}px`;
+  // clone.style.width = `${imgRect.width}px`;
+  // clone.style.height = `${imgRect.height}px`;
+  // clone.style.zIndex = 9999;
+  // clone.style.borderRadius = "8px";
+
+  // document.body.appendChild(clone);
+
+  // gsap.to(clone, {
+  //   duration: 0.8,
+  //   left: cartRect.left,
+  //   top: cartRect.top,
+  //   width: 20,
+  //   height: 20,
+  //   opacity: 0.5,
+  //   ease: "power2.inOut",
+  //   onComplete: () => clone.remove(),
+  // });
+
   const params = useParams();
   const allProducts = useSelector((state) => state.mySlice.allProducts);
   const Product = allProducts?.filter((item) => item.id == params.id);
@@ -73,7 +107,10 @@ const DetailProduct = () => {
             className="leftSidePart  w-full flex flex-row  lg:w-1/2 h-3/4 lg:h-[80vh] border-b-[1px] lg:border-b-0 lg:border-r-[1px] border-gray-500"
           >
             {/* main PIC 🖼️*/}
-            <div className="Card w-full h-[90%] rounded-2xl    justify-center ">
+            <div
+              ref={imgRef}
+              className="Card w-full h-[90%] rounded-2xl    justify-center "
+            >
               <img src={mainImage} className=" h-full object-cover" />
             </div>
 
@@ -149,7 +186,7 @@ const DetailProduct = () => {
               <div className="allSizes flex justify-center items-center text-xl gap-3">
                 {item.Sizes.map((size, index) => (
                   <input
-                    key={index}
+                    key={size}
                     type="button"
                     value={size}
                     onClick={() => setselectedSize(size)}
@@ -184,7 +221,8 @@ const DetailProduct = () => {
               />
 
               <button
-                onClick={() => setqty((prev) => (prev -= 1))}
+                onClick={() => setqty((prev) => (prev > 1 ? prev - 1 : prev))}
+
                 className="buttonAdd px-4 py-2 rounded-lg hover:rounded-sm transition-all duration-100 cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-thin hover:shadow-2xl"
               >
                 -
@@ -194,7 +232,7 @@ const DetailProduct = () => {
             <button
               onClick={() => cartHandler(item)}
               to={"/Cart"}
-              className="blackAddtoCart w-full lg:w-auto  text-xl flex gap-3 justify-center focus:scale-95 active:scale-90 items-center hover:bg-gray-500 px-8 py-3 pointer-coarse: hover:shadow-2xl bg-black text-white rounded-sm "
+              className="blackAddtoCart w-full lg:w-auto cursor-pointer text-xl flex gap-3 justify-center focus:scale-95 active:scale-90 items-center hover:bg-gray-500 px-8 py-3 pointer-coarse: hover:shadow-2xl bg-black text-white rounded-sm "
             >
               <span className="CartIcon">
                 <CiShoppingCart />

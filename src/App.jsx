@@ -42,14 +42,14 @@ const App = () => {
       >
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="topIcon fixed md:hidden bottom-4 right-4 w-[15vw] active:bg-[var(--main-color)] h-[15vw] flex justify-center items-center rounded-full bg-gray-800 text-white shadow-lg hover:scale-105 transition"
+          className="topIcon fixed  md:hidden bottom-4 right-4 w-[15vw] active:bg-[var(--main-color)] h-[15vw] flex justify-center items-center rounded-full bg-gray-800 text-gray-500 shadow-lg hover:scale-105 transition"
         >
           <RxDoubleArrowUp size={24} />
         </button>
 
         {/* <a href='.Navebar' className='topIcon fixed md:hidden  bottom-4 right-4  w-[15vw] h-[15vw] flex justify-center items-center rounded-full'><RxDoubleArrowUp /></a> */}
         
-        <ToastContainer position="top-right" />
+        <ToastContainer position="top-right"/>
 
         <Navbar />
 

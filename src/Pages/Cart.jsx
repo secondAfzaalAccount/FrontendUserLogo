@@ -3,17 +3,21 @@ import Title from "../Components/Title";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteCartItem,
+  editSize,
   GrandTotalAmount,
   incrementQty,
 } from "../Features/ProductSlice.js";
 import { decrementQty } from "../Features/ProductSlice.js";
 import { LiaLongArrowAltRightSolid } from "react-icons/lia"; // icon
 import { MdDelete } from "react-icons/md"; //icon bin
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io"; //icon
+import { CiEdit } from "react-icons/ci"; //icon
 
 const Cart = () => {
   const Cart = useSelector((state) => state.mySlice.Cart);
+  const [sizeEditorId, setsizeEditorId] = useState(null);
+  const location = useLocation();
   const delideliverFee = useSelector((state) => state.mySlice.deliveryFee);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -80,12 +84,78 @@ const Cart = () => {
 
                 {/* size, price, buttons */}
                 <div className="flex flex-col md:flex-row md:gap-6 lg:gap-20 justify-around items-center ">
-                  <h2 className="relative">
-                    {" "}
+                  <h2 className="relative  m-4 min-w-4">
                     {item.Sizes}
-                    <span className="text-xs text-gray-300 absolute left-0 md:left-[-100%] top-[-100%]">
+                    <span className="text-xs  text-gray-300 absolute left-[-250%] md:left-[-100%] md:top-[-100%]">
                       Size:
+                    </span> 
+                    {/* 🖋️ size edit span */}
+                    <span className="absolute right-[-150%] top-[20%] cursor-pointer text-gray-300 hover:text-gray-700">
+                      <CiEdit 
+                        onClick={()=>setsizeEditorId(prev => prev == null ? item.id : null)}
+                      />
                     </span>
+                   
+                    <div
+                      className={`${
+                        sizeEditorId === item.id  && location.pathname === "/Cart"
+                          ? "block z-1000"
+                          : "hidden"
+                      } absolute sizeEdit flex gap-2  flex-col justify-center items-center p-2`}
+                    >
+                      <h3
+                        onClick={() => {
+                          dispatch(editSize({ id: item.id, size: "S" }));
+                          setsizeEditorId(null);
+                        }}
+                        className={`${
+                          item.Sizes === "S"
+                            ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
+                            : "text-black"
+                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] `}
+                      >
+                        S
+                      </h3>
+                      <h3
+                        onClick={() => {
+                          dispatch(editSize({ id: item.id, size: "M" }));
+                          setsizeEditorId(null);
+                        }}
+                        className={`${
+                          item.Sizes === "M"
+                            ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
+                            : "text-black"
+                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px]`}
+                      >
+                        M
+                      </h3>
+                      <h3
+                        onClick={() => {
+                          dispatch(editSize({ id: item.id, size: "L" }));
+                          setsizeEditorId(null);
+                        }}
+                        className={`${
+                          item.Sizes === "L"
+                            ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
+                            : "text-black"
+                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] `}
+                      >
+                        L
+                      </h3>
+                      <h3
+                        onClick={() => {
+                          dispatch(editSize({ id: item.id, size: "XL" }));
+                          setsizeEditorId(null);
+                        }}
+                        className={`${
+                          item.Sizes === "XL"
+                            ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
+                            : "text-black"
+                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] `}
+                      >
+                        XL
+                      </h3>
+                    </div>
                   </h2>
 
                   {/* button + and - */}
@@ -116,7 +186,7 @@ const Cart = () => {
                     </button>
                   </div>
                   {/* price */}
-                  <h2 className="font-semibold w-[80px]">
+                  <h2 className="font-semibold w-[80px] my-4">
                     Rs.{Math.floor(item.price * item.quantity)}/-
                   </h2>
                 </div>
@@ -138,7 +208,9 @@ const Cart = () => {
 
             <div className="bg-white px-6 py-8 h-[50vh] border-t border-gray-300 flex flex-col justify-center items-start gap-5 shadow-inner rounded-t-2xl md:gap-6">
               <div className="w-full flex flex-wrap  lg:flex-row justify-between text-gray-700 text-lg lg:text-xl font-medium">
-                <span className="flex flex-nowrap md:flex-wrap lg:flex-row justify-between">Total:</span>
+                <span className="flex flex-nowrap md:flex-wrap lg:flex-row justify-between">
+                  Total:
+                </span>
                 <span>Rs.{Math.floor(GrandTotal)}/-</span>
               </div>
 

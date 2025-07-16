@@ -9,7 +9,7 @@ const LatestCollection = () => {
     <div className="w-full py-2 sm:py-6 px-2 ">
       <div className="BestSellerProducts grid gap-4 grid-cols-[repeat(auto-fit,_minmax(220px,_1fr))]">
         {allProducts?.slice(0,5).map((item, index) => (
-          <ProductDisplay key={item.id} name={item.name} quantity={item.quantity} price={item.price} image={item.image} />
+          <ProductDisplay key={item.id} id={item.id} name={item.name} quantity={item.quantity} price={item.price} image={item.image} />
         ))}
       </div>
     </div>

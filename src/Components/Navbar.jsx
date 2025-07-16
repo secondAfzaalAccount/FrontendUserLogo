@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { CiSearch } from "react-icons/ci"; //icon
 import { CiUser } from "react-icons/ci"; // icon
@@ -11,11 +11,12 @@ import { CgProfile } from "react-icons/cg"; //icon
 import { CiBoxList } from "react-icons/ci"; //icon
 import { TbLogin } from "react-icons/tb"; //icon
 import { PiCardsThin } from "react-icons/pi"; //icon
-import { IoHomeOutline } from "react-icons/io5"; //icon 
+import { IoHomeOutline } from "react-icons/io5"; //icon
 import { BsCreditCard2Front } from "react-icons/bs"; //icon
-import { PiPhoneTransferThin } from "react-icons/pi";//icon
+import { PiPhoneTransferThin } from "react-icons/pi"; //icon
 import { useDispatch, useSelector } from "react-redux";
 import { SEARCHINPUT } from "../Features/ProductSlice";
+export const cartIconRef = { current: null };
 
 const Navbar = () => {
   const Cart = useSelector((state) => state.mySlice.Cart);
@@ -24,6 +25,11 @@ const Navbar = () => {
   const [profileOptions, setprofileOptions] = useState(false);
   const [openSearchBar, setopenSearchBar] = useState(false);
   const [searchInput, setsearchInput] = useState();
+  const cartRef = useRef(null);
+
+  useEffect(() => {
+    cartIconRef.current = cartRef.current;
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -130,10 +136,14 @@ const Navbar = () => {
             </div>
 
             {/*🛒 */}
-            <div className="relative">
+            <div ref={cartRef} className="relative">
               <Link to={"/Cart"}>
                 <CiShoppingCart className="text-xl sm:text-2xl cursor-pointer transition-all duration-200 hover:text-black hover:scale-110" />
-                <h2 className={`${TotalItems === 0 ? 'hidden' : 'block'} absolute top-[-50%] right-[-40%] bg-black text-white text-[10px] font-semibold w-3 md:w-5 h-3 md:h-5 flex items-center justify-center rounded-full`}>
+                <h2
+                  className={`${
+                    TotalItems === 0 ? "hidden" : "block"
+                  } absolute top-[-50%] right-[-40%] bg-black text-white text-[10px] font-semibold w-3 md:w-5 h-3 md:h-5 flex items-center justify-center rounded-full`}
+                >
                   {TotalItems}
                 </h2>
               </Link>
@@ -161,7 +171,9 @@ const Navbar = () => {
               menu ? "fixed" : "hidden"
             }  w-full h-screen py-4 px-2  absolute top-0 ring-0 bg-[var(--bg-color)] z-1000`}
           >
-            <h1 className="text-4xl font-bold text-gray-400 w-full pb-3 border-b-[1px] border-gray-300">MENU</h1>
+            <h1 className="text-4xl font-bold text-gray-400 w-full pb-3 border-b-[1px] border-gray-300">
+              MENU
+            </h1>
             <div className="flex flex-col  w-full  ">
               <div className="flex justify-end items-end w-full px-10 py-4 ">
                 <RiCloseLargeFill
@@ -176,11 +188,13 @@ const Navbar = () => {
                   to={"/"}
                   onClick={() => setmenu((prev) => !prev)}
                   className={`${
-                    location.pathname === "/" ? "text-[var(--main-color)] text-3xl"
+                    location.pathname === "/"
+                      ? "text-[var(--main-color)] text-3xl"
                       : "text-2xl"
                   } hover:text-black  flex gap-6 justify-center items-center  `}
                 >
-                 <IoHomeOutline /><span>Home</span> 
+                  <IoHomeOutline />
+                  <span>Home</span>
                 </Link>
                 <Link
                   onClick={() => setmenu((prev) => !prev)}
@@ -191,7 +205,7 @@ const Navbar = () => {
                       : "text-2xl"
                   } hover:text-black flex gap-6 justify-center items-center   `}
                 >
-                 <PiCardsThin /> <span>Collections</span>  
+                  <PiCardsThin /> <span>Collections</span>
                 </Link>
                 <Link
                   onClick={() => setmenu((prev) => !prev)}
@@ -202,7 +216,8 @@ const Navbar = () => {
                       : "text-2xl"
                   } hover:text-black flex gap-6 justify-center items-center `}
                 >
-                  <BsCreditCard2Front /><span>About</span> 
+                  <BsCreditCard2Front />
+                  <span>About</span>
                 </Link>
                 <Link
                   onClick={() => setmenu((prev) => !prev)}
@@ -213,10 +228,9 @@ const Navbar = () => {
                       : "text-2xl"
                   } hover:text-black  flex gap-6 justify-center items-center  `}
                 >
-                 <PiPhoneTransferThin /> <span>Contact</span> 
+                  <PiPhoneTransferThin /> <span>Contact</span>
                 </Link>
               </div>
-              
             </div>
           </div>
         </div>
