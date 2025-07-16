@@ -16,7 +16,6 @@ import { BsCreditCard2Front } from "react-icons/bs"; //icon
 import { PiPhoneTransferThin } from "react-icons/pi"; //icon
 import { useDispatch, useSelector } from "react-redux";
 import { SEARCHINPUT } from "../Features/ProductSlice";
-export const cartIconRef = { current: null };
 
 const Navbar = () => {
   const Cart = useSelector((state) => state.mySlice.Cart);
@@ -25,11 +24,8 @@ const Navbar = () => {
   const [profileOptions, setprofileOptions] = useState(false);
   const [openSearchBar, setopenSearchBar] = useState(false);
   const [searchInput, setsearchInput] = useState();
-  const cartRef = useRef(null);
 
-  useEffect(() => {
-    cartIconRef.current = cartRef.current;
-  }, []);
+
 
   const dispatch = useDispatch();
 
@@ -136,9 +132,9 @@ const Navbar = () => {
             </div>
 
             {/*🛒 */}
-            <div ref={cartRef} className="relative">
+            <div  className="relative">
               <Link to={"/Cart"}>
-                <CiShoppingCart className="text-xl sm:text-2xl cursor-pointer transition-all duration-200 hover:text-black hover:scale-110" />
+                <CiShoppingCart className={`${location.pathname === '/Cart' ? 'text-[var(--main-color)]' : ''} text-xl sm:text-2xl cursor-pointer transition-all duration-200 hover:text-black hover:scale-110"`} />
                 <h2
                   className={`${
                     TotalItems === 0 ? "hidden" : "block"

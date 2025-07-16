@@ -6,40 +6,47 @@ import { CiShoppingCart } from "react-icons/ci";
 import { addToCart } from "../Features/ProductSlice";
 import { toast } from "react-toastify";
 import gsap from "gsap";
-import { cartIconRef } from "../Components/Navbar";
 
 const DetailProduct = () => {
   const imgRef = useRef(null);
-//gsap
-  // const img = imgRef.current;
-  // const cart = cartIconRef.current;
+  const plusRef = useRef(null);
 
-  // if (!img || !cart) return; // ✅ prevent error
+  
+ const gsapAnimation = () => {
+  console.log('gsap animation ...');
 
-  // const imgRect = img.getBoundingClientRect();
-  // const cartRect = cart.getBoundingClientRect();
+  const img = imgRef.current;
+  const plus = plusRef.current;
 
-  // const clone = img.cloneNode(true);
-  // clone.style.position = "fixed";
-  // clone.style.left = `${imgRect.left}px`;
-  // clone.style.top = `${imgRect.top}px`;
-  // clone.style.width = `${imgRect.width}px`;
-  // clone.style.height = `${imgRect.height}px`;
-  // clone.style.zIndex = 9999;
-  // clone.style.borderRadius = "8px";
+  if (!img || !plus) return;
 
-  // document.body.appendChild(clone);
+  const imgRect = img.getBoundingClientRect();
+  const cartRect = plus.getBoundingClientRect();
 
-  // gsap.to(clone, {
-  //   duration: 0.8,
-  //   left: cartRect.left,
-  //   top: cartRect.top,
-  //   width: 20,
-  //   height: 20,
-  //   opacity: 0.5,
-  //   ease: "power2.inOut",
-  //   onComplete: () => clone.remove(),
-  // });
+  const clone = img.cloneNode(true);
+  clone.style.position = "fixed";
+  clone.style.left = `${imgRect.left}px`;
+  clone.style.top = `${imgRect.top}px`;
+  clone.style.width = `${imgRect.width}px`;
+  clone.style.height = `${imgRect.height}px`;
+  clone.style.zIndex = 9999;
+  clone.style.borderRadius = "8px";
+
+  document.body.appendChild(clone);
+
+  gsap.to(clone, {
+    duration: 0.8,
+    left: cartRect.left,
+    top: cartRect.top,
+    width: 20,
+    height: 20,
+    opacity: 0.5,
+    ease: "power2.inOut",
+    onComplete: () => clone.remove(),
+  });
+};
+
+ 
 
   const params = useParams();
   const allProducts = useSelector((state) => state.mySlice.allProducts);
@@ -104,12 +111,12 @@ const DetailProduct = () => {
           {/* // left ⬅️------------------------------------- */}
           <div
             key={item.id}
-            className="leftSidePart  w-full flex flex-row  lg:w-1/2 h-3/4 lg:h-[80vh] border-b-[1px] lg:border-b-0 lg:border-r-[1px] border-gray-500"
+            className="leftSidePart  w-full lg:w-1/2 flex flex-row  lg:h-[80vh] border-b-[1px] lg:border-b-0 lg:border-r-[1px] border-gray-500"
           >
             {/* main PIC 🖼️*/}
             <div
               ref={imgRef}
-              className="Card w-full h-[90%] rounded-2xl    justify-center "
+              className="Card w-full h-[70%] rounded-2xl    justify-center "
             >
               <img src={mainImage} className=" h-full object-cover" />
             </div>
@@ -166,9 +173,9 @@ const DetailProduct = () => {
 
           {/* ---------------// right ➡️------------------------------------------ */}
 
-          <div className="right w-full md:w-1/2 lg:pl-6 text-xl md:text-3xl gap-3 font-semibold font-[LoginFont] md:min-h-[80vh] p-2  flex flex-col justify-start items-start ">
+          <div className="right w-full md:w-1/2 lg:pl-6 text-xl md:text-3xl md:gap-3 font-semibold font-[LoginFont] md:min-h-[80vh] p-2  flex flex-col justify-start items-start ">
             {/* Name */}
-            <div className="Name flex-col">
+            <div className="Name md:flex-col">
               <h4 className="text-gray-300 text-xs">Product Name:</h4>
               <h2>{item.name}</h2>
             </div>
@@ -181,7 +188,7 @@ const DetailProduct = () => {
             </div>
 
             {/* Sizes: */}
-            <div className=" flex-col my-2">
+            <div className=" flex-col md:my-2">
               <h4 className="text-black text-xl">Sizes:</h4>
               <div className="allSizes flex justify-center items-center text-xl gap-3">
                 {item.Sizes.map((size, index) => (
@@ -204,10 +211,15 @@ const DetailProduct = () => {
             <div className=" flex flex-row gap-3 justify-center items-center ">
               <h4 className="text-black text-xl">Quantity:</h4>
             </div>
+
             {/*quantity Buttons */}
-            <div className="ENTER  flex flex-row gap-4 justify-center items-center border-b-2 border-gray-500 pb-6">
+            <div className="ENTER  flex flex-row gap-4 justify-center items-center md:border-b-2 border-gray-500 pb-3 md:pb-6">
               <button
-                onClick={() => setqty((prev) => (prev += 1))}
+              ref={plusRef}
+                onClick={() => {
+                  setqty((prev) => (prev += 1));
+                  gsapAnimation()
+                }}
                 className="buttonAdd px-4 py-2 rounded-lg hover:rounded-sm transition-all duration-100 cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-thin hover:shadow-2xl"
               >
                 +

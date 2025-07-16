@@ -4,7 +4,8 @@ import Title from "./../Components/Title.jsx";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md"; //icon
-import { SEARCHINPUT } from "../Features/ProductSlice.js";
+import { BiArrowBack } from "react-icons/bi"; //icon
+import { Link } from "react-router-dom";
 
 const Collections = () => {
   const allProductsFromRedux = useSelector(
@@ -17,9 +18,6 @@ const Collections = () => {
   const [filteredProducts, setfilteredProducts] = useState([]);
   const [filterBOX, setfilterBOX] = useState(false);
   const [PricefilterBOX, setPricefilterBOX] = useState(false);
-  // SEARCHINPUT
-
-  // const dispatch = useDispatch()
 
   const SearchFilterHandler = () => {
     if (allProductsFromRedux && srchInputFromStore.length === 0) {
@@ -82,6 +80,13 @@ const Collections = () => {
   return (
     <>
       <div className=" py-2 sm:py-4  w-full   px-4 sm:px-8">
+        <Link
+        to={"/"}
+        className="w-full  text-sm  flex flex-nowrap justify-start items-center gap-2 text-gray-500 hover:text-black hover:font-semibold"
+      >
+        <BiArrowBack /> Home
+      </Link>
+
         <Title text1={"Total"} text2={"Collections"} />
 
         <div className="div w-full flex flex-col gap-4  md:flex-row ">

@@ -13,6 +13,7 @@ import { MdDelete } from "react-icons/md"; //icon bin
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io"; //icon
 import { CiEdit } from "react-icons/ci"; //icon
+import { BiArrowBack } from "react-icons/bi"; //icon
 
 const Cart = () => {
   const Cart = useSelector((state) => state.mySlice.Cart);
@@ -61,7 +62,15 @@ const Cart = () => {
   } else {
     return (
       <>
+         <Link
+        to={"/Collections"}
+        className="w-full  text-sm  flex flex-nowrap justify-start items-center gap-2 text-gray-500 hover:text-black hover:font-semibold"
+      >
+        <BiArrowBack /> Continue shopping
+      </Link>
         <div className="w-full min-h-dvh  flex flex-col gap-2 lg:flex-row">
+
+
           {/* ⬅️ */}
           <div className="left w-full lg:w-3/4 h-full  flex flex-col gap-3">
             <Title text1={"Your"} text2={"Shoping Cart"} />
