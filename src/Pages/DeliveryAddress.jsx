@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Title from "../Components/Title";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GiCash } from "react-icons/gi"; //money icon
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const DeliveryAddress = () => {
+  const token = useSelector((state) => state.mySlice.token);
+  const [Method, setMethod] = useState("COD");
+  const navigate = useNavigate();
+
   const [formData, setformData] = useState({
     FirstName: "",
     LastName: "",
@@ -20,21 +26,22 @@ const DeliveryAddress = () => {
     setformData((prev) => ({ ...prev, [Name]: value }));
   };
 
-  const [Method, setMethod] = useState("COD");
-
-
-  // useEffect(() => {
-  // console.log(formData);
-  
-  // }, [onChangeHandler])
-  
-
-
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (!token) {
+      toast.info("🔒 Please log in to complete your order 😊", );
+      
+      setTimeout(() => {
+        navigate("/login",{state: 'checkingOut'});
+      }, 3500);
+    }
+  };
 
   return (
     <>
       <form
-        // onSubmit={onSubmitHandler}
+        noValidate
+        onSubmit={(e) => onSubmitHandler(e)}
         className="flex flex-col sm:flex-row mb-4 justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t"
       >
         {/*---------⬅️--⬅️---- Left Side----------------------------------------------- ⬅ */}
@@ -189,7 +196,7 @@ const DeliveryAddress = () => {
 
           {/* Place Order */}
           <button
-            // type="submit"
+            type="submit"
             className=" w-full my-4 flex justify-center items-center gap-3  px-4 py-2 rounded-sm bg-[var(--main-color)] hover:bg-[var(--main-color)]/90 hover:shadow-2xl active:scale-95 hover:border-2 cursor-pointer text-white "
           >
             Place Order

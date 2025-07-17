@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const token = (localStorage.getItem('token'));
+console.log(token);
+
+
 let cartFromLocalStorage = [];
 try {
   const stored = localStorage.getItem("Cart");
@@ -14,6 +18,7 @@ const initialState = {
   Cart: cartFromLocalStorage || [],
   deliveryFee: 120,
   GrandTotalAmount: "",
+  token: token || null,
 };
 
 const productSlice = createSlice({
@@ -70,14 +75,20 @@ const productSlice = createSlice({
     },
     editSize: (state, action) => {
       console.log(action.payload);
-      const item = state.Cart.find((i)=> i.id == action.payload.id)
+      const item = state.Cart.find((i) => i.id == action.payload.id);
       if (item) {
         item.Sizes = action.payload.size;
       }
       localStorage.setItem("Cart", JSON.stringify(state.Cart));
-
-
     },
+      saveToken: (state, action) => {
+      state.token = action.payload;
+    },
+     logout: (state, action) => {
+      localStorage.setItem('token', '')
+      state.token = '';
+    },
+ 
   },
 });
 
@@ -89,6 +100,8 @@ export const {
   decrementQty,
   deleteCartItem,
   GrandTotalAmount,
-  editSize
+  editSize,
+  saveToken,
+  logout
 } = productSlice.actions;
 export default productSlice.reducer;

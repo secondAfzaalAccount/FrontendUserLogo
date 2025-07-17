@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci"; //icon
 import { CiUser } from "react-icons/ci"; // icon
 import { CiShoppingCart } from "react-icons/ci"; //icon
@@ -15,20 +15,22 @@ import { IoHomeOutline } from "react-icons/io5"; //icon
 import { BsCreditCard2Front } from "react-icons/bs"; //icon
 import { PiPhoneTransferThin } from "react-icons/pi"; //icon
 import { useDispatch, useSelector } from "react-redux";
-import { SEARCHINPUT } from "../Features/ProductSlice";
+import { logout, SEARCHINPUT } from "../Features/ProductSlice";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const Cart = useSelector((state) => state.mySlice.Cart);
+  const token = useSelector((state) => state.mySlice.token);
+  console.log(token);
+
   const location = useLocation();
+  const navigate = useNavigate();
   const [menu, setmenu] = useState(false);
   const [profileOptions, setprofileOptions] = useState(false);
   const [openSearchBar, setopenSearchBar] = useState(false);
   const [searchInput, setsearchInput] = useState();
 
-
-
   const dispatch = useDispatch();
-
   const TotalItems = Cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
@@ -87,7 +89,9 @@ const Navbar = () => {
             {/* ------------------------------USER 👮----------- */}
             <div title="User Options" className="relative">
               <CiUser
-                onClick={() => setprofileOptions((prev) => !prev)}
+                onClick={() => {
+                  setprofileOptions((prev) => !prev);
+                }}
                 className={`${
                   profileOptions ? "text-[var(--main-color)]" : ""
                 } text-xl sm:text-2xl cursor-pointer transition-all duration-200 hover:text-black hover:scale-110"`}
@@ -99,9 +103,14 @@ const Navbar = () => {
                   profileOptions ? "absolute z-50" : "hidden"
                 } profileOptions text-xl font-semibold md:font-medium div py-4 px-4 rounded-sm flex flex-col gap-2 absolute top-[30%] right-[100%]  `}
               >
+                <span 
+                onClick={()=>setprofileOptions((prev) => !prev)} // x to close options
+                className="absolute left-2 top-2 text-sm"><RiCloseLargeFill/></span>
                 <Link
                   onClick={() => setprofileOptions((prev) => !prev)}
-                  className={` options px-3 py-2 flex gap-4  justify-start items-center rounded-sm pointer-coarse text-balance hover:text-[var(--main-color)]`}
+                  className={`${
+                    token ? "block" : "hidden"
+                  } options px-3 py-2 flex gap-4  justify-start items-center rounded-sm pointer-coarse text-balance hover:text-[var(--main-color)]`}
                 >
                   <CgProfile /> Profile
                 </Link>
@@ -113,10 +122,13 @@ const Navbar = () => {
                     location.pathname === "/Orders"
                       ? "text-[var(--main-color)]"
                       : ""
+                  } ${
+                    token ? "block" : "hidden"
                   } options px-3 py-2 flex gap-4 justify-start items-center  pointer-coarse rounded-sm text-balance hover:text-[var(--main-color)]`}
                 >
                   <CiBoxList /> Orders
                 </Link>
+
                 <Link
                   to={"/login"}
                   onClick={() => setprofileOptions((prev) => !prev)}
@@ -132,9 +144,15 @@ const Navbar = () => {
             </div>
 
             {/*🛒 */}
-            <div  className="relative">
+            <div className="relative">
               <Link to={"/Cart"}>
-                <CiShoppingCart className={`${location.pathname === '/Cart' ? 'text-[var(--main-color)]' : ''} text-xl sm:text-2xl cursor-pointer transition-all duration-200 hover:text-black hover:scale-110"`} />
+                <CiShoppingCart
+                  className={`${
+                    location.pathname === "/Cart"
+                      ? "text-[var(--main-color)]"
+                      : ""
+                  } text-xl sm:text-2xl cursor-pointer transition-all duration-200 hover:text-black hover:scale-110"`}
+                />
                 <h2
                   className={`${
                     TotalItems === 0 ? "hidden" : "block"
@@ -146,10 +164,23 @@ const Navbar = () => {
             </div>
 
             <span className="h-full md:hidden w-[1px] bg-gray-300 "></span>
-            {/* LOGOUT */}
-            <button className="md:bg-red-500 text-xl  hover:shadow-2xl cursor-pointer hover:scale-105 text-gray-500  md:text-white rounded-md px-4 py-2  text-balance flex justify-center items-center gap-2">
-              <h1 className="hidden md:block">Logout</h1>{" "}
-              <IoLogOutOutline className="md:text-2xl" />{" "}
+            {/* LOGOUT >🚪 */}
+            <button
+              onClick={() => {
+                dispatch(logout());
+                toast.success("👋 successfully logged out.", {
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                });
+                navigate("/login");
+              }}
+              className={`${
+                token ? "block" : "hidden"
+              } md:bg-red-500 text-xl  hover:shadow-2xl cursor-pointer hover:scale-105 text-gray-500  md:text-white rounded-md px-4 py-2  text-balance flex justify-center items-center gap-2"`}
+            >
+              <h1 className="hidden md:block">Logout</h1>
+              <IoLogOutOutline className="md:text-2xl" />
             </button>
 
             <div
