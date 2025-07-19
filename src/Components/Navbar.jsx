@@ -15,13 +15,15 @@ import { IoHomeOutline } from "react-icons/io5"; //icon
 import { BsCreditCard2Front } from "react-icons/bs"; //icon
 import { PiPhoneTransferThin } from "react-icons/pi"; //icon
 import { useDispatch, useSelector } from "react-redux";
-import { logout, SEARCHINPUT } from "../Features/ProductSlice";
+import { addcurrentUser, logout, SEARCHINPUT } from "../Features/ProductSlice";
 import { toast } from "react-toastify";
+
 
 const Navbar = () => {
   const Cart = useSelector((state) => state.mySlice.Cart);
   const token = useSelector((state) => state.mySlice.token);
-  console.log(token);
+  const currentUser = useSelector((state) => state.mySlice.currentUser);
+  
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -88,24 +90,32 @@ const Navbar = () => {
 
             {/* ------------------------------USER 👮----------- */}
             <div title="User Options" className="relative">
-              <CiUser
-                onClick={() => {
-                  setprofileOptions((prev) => !prev);
-                }}
-                className={`${
-                  profileOptions ? "text-[var(--main-color)]" : ""
-                } text-xl sm:text-2xl cursor-pointer transition-all duration-200 hover:text-black hover:scale-110"`}
-              />
+              <div className="NameAndProfile  flex justify-center items-center">
+                <h2
+                onClick={()=>setprofileOptions((prev) => !prev)}
+                 className={` text-[var(--main-color)] font-semibold text-sm`}>{` ${currentUser ? "Hi! "+currentUser.toUpperCase(): ''}`}</h2>
+                <CiUser
+                  onClick={() => {
+                    setprofileOptions((prev) => !prev);
+                  }}
+                  className={`${
+                    profileOptions ? "text-[var(--main-color)]" : ""
+                  } text-xl sm:text-2xl cursor-pointer transition-all duration-200 hover:text-black hover:scale-110"`}
+                />
+              </div>
 
               {/* profile, orders, login */}
               <span
                 className={`${
                   profileOptions ? "absolute z-50" : "hidden"
-                } profileOptions text-xl font-semibold md:font-medium div py-4 px-4 rounded-sm flex flex-col gap-2 absolute top-[30%] right-[100%]  `}
+                } profileOptions text-xl font-semibold md:font-medium div py-4 px-4 rounded-sm flex flex-col gap-2 absolute top-[110%] right-[0%] md:top-[30%] md:right-[100%]  `}
               >
-                <span 
-                onClick={()=>setprofileOptions((prev) => !prev)} // x to close options
-                className="absolute left-2 top-2 text-sm"><RiCloseLargeFill/></span>
+                <span
+                  onClick={() => setprofileOptions((prev) => !prev)} // x to close options
+                  className="absolute left-2 top-2 text-sm"
+                >
+                  <RiCloseLargeFill />
+                </span>
                 <Link
                   onClick={() => setprofileOptions((prev) => !prev)}
                   className={`${
@@ -168,6 +178,7 @@ const Navbar = () => {
             <button
               onClick={() => {
                 dispatch(logout());
+                dispatch(addcurrentUser(''))
                 toast.success("👋 successfully logged out.", {
                   hideProgressBar: false,
                   closeOnClick: true,

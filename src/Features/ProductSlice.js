@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
-const token = (localStorage.getItem('token'));
-console.log(token);
-
+const token = localStorage.getItem("token");
+const currentUser = localStorage.getItem("currentUser");
+const amount = localStorage.getItem("amount");
 
 let cartFromLocalStorage = [];
 try {
@@ -17,8 +18,9 @@ const initialState = {
   Search: "",
   Cart: cartFromLocalStorage || [],
   deliveryFee: 120,
-  GrandTotalAmount: "",
+  GrandTotalAmount: Number(amount) || "",
   token: token || null,
+  currentUser: currentUser || null,
 };
 
 const productSlice = createSlice({
@@ -30,6 +32,10 @@ const productSlice = createSlice({
     },
     SEARCHINPUT: (state, action) => {
       state.Search = action.payload;
+    },
+    clearCart: (state, action) => {
+     state.Cart = []
+     localStorage.setItem('Cart', JSON.stringify([]));
     },
     addToCart: (state, action) => {
       const item = state.Cart.find(
@@ -64,31 +70,34 @@ const productSlice = createSlice({
       }
     },
     deleteCartItem: (state, action) => {
-      console.log(action.payload);
-
       const item = state.Cart.filter((i) => i.id !== action.payload);
       state.Cart = item;
       localStorage.setItem("Cart", JSON.stringify(state.Cart));
     },
     GrandTotalAmount: (state, action) => {
+      localStorage.setItem('amount', action.payload)
       state.GrandTotalAmount = action.payload;
     },
     editSize: (state, action) => {
-      console.log(action.payload);
       const item = state.Cart.find((i) => i.id == action.payload.id);
       if (item) {
         item.Sizes = action.payload.size;
       }
       localStorage.setItem("Cart", JSON.stringify(state.Cart));
     },
-      saveToken: (state, action) => {
+    saveToken: (state, action) => {
       state.token = action.payload;
     },
-     logout: (state, action) => {
-      localStorage.setItem('token', '')
-      state.token = '';
+    addcurrentUser: (state, action) => {
+      localStorage.setItem('currentUser', action.payload)
+      state.currentUser = action.payload;
     },
- 
+    logout: (state, action) => {
+      localStorage.setItem("token", "");
+      state.token = "";
+      state.currentUser = "";
+       localStorage.setItem('currentUser', '')
+    },
   },
 });
 
@@ -101,7 +110,9 @@ export const {
   deleteCartItem,
   GrandTotalAmount,
   editSize,
+  addcurrentUser,
   saveToken,
-  logout
+  logout,
+  clearCart
 } = productSlice.actions;
 export default productSlice.reducer;

@@ -43,7 +43,7 @@ const Cart = () => {
     navigate("/DeliveryAddress");
   };
 
-  if (Cart.length === 0) {
+  if (Cart.length === 0 || Cart === NaN) {
     return (
       <>
         <div className="relative w-full min-h-dvh text-xl md:text-2xl    lg:flex-row">
@@ -87,19 +87,20 @@ const Cart = () => {
               >
                 {/* img and name */}
                 <div className="flex flex-col md:flex-row gap-2 justify-center items-center">
-                  <img src={item.image[0]} alt="" className="w-25 rounded-sm" />
+                  <img src={item?.image?.[0]} alt="" className="w-25 rounded-sm" />
                   <h1 className="max-w-[130px]">{item.name}</h1>
                 </div>
 
                 {/* size, price, buttons */}
                 <div className="flex flex-col md:flex-row md:gap-6 lg:gap-20 justify-around items-center ">
                   <h2 className="relative  m-4 min-w-4">
-                    {item.Sizes}
+                    {item?.Sizes}
                     <span className="text-xs  text-gray-300 absolute left-[-250%] md:left-[-100%] md:top-[-100%]">
                       Size:
                     </span> 
                     {/* 🖋️ size edit span */}
-                    <span className="absolute right-[-150%] top-[20%] cursor-pointer text-gray-300 hover:text-gray-700">
+                    <span className=
+                    {`absolute right-[-150%] top-[20%] cursor-pointer text-gray-300 hover:text-gray-700`}>
                       <CiEdit 
                         onClick={()=>setsizeEditorId(prev => prev == null ? item.id : null)}
                       />

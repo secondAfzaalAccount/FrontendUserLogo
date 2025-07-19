@@ -116,9 +116,9 @@ const DetailProduct = () => {
             {/* main PIC 🖼️*/}
             <div
               ref={imgRef}
-              className="Card w-full h-[70%] rounded-2xl    justify-center "
+              className="Card w-full h-[70%] md:h-full rounded-2xl    justify-center "
             >
-              <img src={mainImage} className=" h-full object-cover" />
+              <img src={mainImage} className=" h-[50vh] md:h-full object-cover" />
             </div>
 
             {/* 4️⃣ pics of same item*/}
@@ -127,18 +127,18 @@ const DetailProduct = () => {
             >
               <div
                 onClick={() => setmainImage(Product[0].image[0])}
-                className="img1 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2 cursor-pointer bg-white border-[1px]  border-gray-500   h-15 w-15  md:h-30 md:w-30"
+                className="img1 rounded-sm  hover:shadow-2xl  flex justify-center items-center hover:border-2 cursor-pointer bg-white border-[1px]  border-gray-500   h-15 w-15  md:h-25 md:w-25"
               >
                 <img
                   src={item.image[0]}
                   alt=""
-                  className=" h-full object-cover"
+                  className=" h-full  object-contain"
                 />
               </div>
 
               <div
                 onClick={() => setmainImage(Product[0].image[1])}
-                className="img2 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2 cursor-pointer bg-white border-[1px]  border-gray-500   h-15 w-15 md:h-30 md:w-30 "
+                className="img2 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2 cursor-pointer bg-white border-[1px]  border-gray-500   h-15 w-15 md:h-25 md:w-25 "
               >
                 <img
                   src={item.image[1] || item.image[0]}
@@ -149,7 +149,7 @@ const DetailProduct = () => {
 
               <div
                 onClick={() => setmainImage(Product[0].image[2])}
-                className="img3 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2 cursor-pointer bg-white border-[1px]  border-gray-500   h-15 w-15 md:h-30 md:w-30 "
+                className="img3 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2 cursor-pointer bg-white border-[1px]  border-gray-500   h-15 w-15 md:h-25 md:w-25 "
               >
                 <img
                   src={item.image[2] || item.image[0]}
@@ -160,7 +160,7 @@ const DetailProduct = () => {
 
               <div
                 onClick={() => setmainImage(Product[0].image[3])}
-                className="img4 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2 cursor-pointer bg-white border-[1px]  border-gray-500   h-15 w-15 md:h-30 md:w-30 "
+                className="img4 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2 cursor-pointer bg-white border-[1px]  border-gray-500   h-15 w-15 md:h-25 md:w-25 "
               >
                 <img
                   src={item.image[3] || item.image[0]}
@@ -199,9 +199,9 @@ const DetailProduct = () => {
                     onClick={() => setselectedSize(size)}
                     className={`${
                       selectedSize === size
-                        ? "bg-[var(--main-color)]"
-                        : "bg-black"
-                    } rounded-3xl active:scale-90 hover:bg-black/70 text-white cursor-pointer hover:shadow-2xl py-2 px-4`}
+                        ? "bg-[var(--main-color)] text-white"
+                        : "bg-transparent "
+                    } rounded-3xl active:scale-90 hover:bg-black/70 hover:text-white text-gray-500 cursor-pointer hover:shadow-2xl py-1 md:py-2 px-4`}
                   />
                 ))}
               </div>
@@ -253,13 +253,13 @@ const DetailProduct = () => {
             </button>
 
             {/* Discription for mobil screen: */}
-            <div className="relative flex-col md:hidden pb-6">
+            <div className="relative flex-col  md:hidden py-6">
               <h4 className="text-black text-xl ">Discription:</h4>
               <p
                 ref={pTag}
                 className={`${
                   !discReadMore ? "h-20 overflow-y-hidden" : "h-auto"
-                }  text-justify text-sm text-gray-500  pb-12"`}
+                }  text-justify text-sm text-gray-500  pb-12 font-sans`}
               >
                 {item.description}
               </p>
