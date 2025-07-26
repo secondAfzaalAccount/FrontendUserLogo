@@ -116,11 +116,12 @@ const Navbar = () => {
                 >
                   <RiCloseLargeFill />
                 </span>
+
                 <Link
                   onClick={() => setprofileOptions((prev) => !prev)}
                   className={`${
                     token ? "block" : "hidden"
-                  } options px-3 py-2 flex gap-4  justify-start items-center rounded-sm pointer-coarse text-balance hover:text-[var(--main-color)]`}
+                  } options px-6 py-2 flex gap-4  justify-start items-center rounded-sm pointer-coarse text-balance hover:text-[var(--main-color)]`}
                 >
                   <CgProfile /> Profile
                 </Link>
@@ -134,7 +135,7 @@ const Navbar = () => {
                       : ""
                   } ${
                     token ? "block" : "hidden"
-                  } options px-3 py-2 flex gap-4 justify-start items-center  pointer-coarse rounded-sm text-balance hover:text-[var(--main-color)]`}
+                  } options px-6 py-2 flex gap-4 justify-start items-center  pointer-coarse rounded-sm text-balance hover:text-[var(--main-color)]`}
                 >
                   <CiBoxList /> Orders
                 </Link>
@@ -146,7 +147,7 @@ const Navbar = () => {
                     location.pathname === "/login"
                       ? "text-[var(--main-color)]"
                       : ""
-                  } options px-3 py-2 flex gap-4 justify-start items-center  pointer-coarse text-balance rounded-sm hover:text-[var(--main-color)]`}
+                  } options px-6 py-2 flex gap-4 justify-start items-center  pointer-coarse text-balance rounded-sm hover:text-[var(--main-color)]`}
                 >
                   <TbLogin /> Login
                 </Link>

@@ -11,42 +11,40 @@ const DetailProduct = () => {
   const imgRef = useRef(null);
   const plusRef = useRef(null);
 
-  
- const gsapAnimation = () => {
-  console.log('gsap animation ...');
+  const gsapAnimation = () => {
+    console.log("gsap animation ...");
 
-  const img = imgRef.current;
-  const plus = plusRef.current;
+    const img = imgRef.current;
+    const plus = plusRef.current;
 
-  if (!img || !plus) return;
+    if (!img || !plus) return;
 
-  const imgRect = img.getBoundingClientRect();
-  const cartRect = plus.getBoundingClientRect();
+    const imgRect = img.getBoundingClientRect();
+    const cartRect = plus.getBoundingClientRect();
 
-  const clone = img.cloneNode(true);
-  clone.style.position = "fixed";
-  clone.style.left = `${imgRect.left}px`;
-  clone.style.top = `${imgRect.top}px`;
-  clone.style.width = `${imgRect.width}px`;
-  clone.style.height = `${imgRect.height}px`;
-  clone.style.zIndex = 9999;
-  clone.style.borderRadius = "8px";
+    const clone = img.cloneNode(true);
+    clone.style.position = "fixed";
+    clone.style.left = `${imgRect.left}px`;
+    clone.style.top = `${imgRect.top}px`;
+    clone.style.width = `${imgRect.width}px`;
+    clone.style.height = `${imgRect.height}px`;
+    clone.style.zIndex = 9999;
+    clone.style.borderRadius = "8px";
 
-  document.body.appendChild(clone);
+    document.body.appendChild(clone);
 
-  gsap.to(clone, {
-    duration: 0.8,
-    left: cartRect.left,
-    top: cartRect.top,
-    width: 20,
-    height: 20,
-    opacity: 0.5,
-    ease: "power2.inOut",
-    onComplete: () => clone.remove(),
-  });
-};
-
- 
+    gsap.to(clone, {
+      duration: 0.8,
+      left: cartRect.left,
+      top: cartRect.top,
+      width: 20,
+      height: 20,
+      opacity: 0.5,
+      scale: 0,
+      ease: "power2.inOut",
+      onComplete: () => clone.remove(),
+    });
+  };
 
   const params = useParams();
   const allProducts = useSelector((state) => state.mySlice.allProducts);
@@ -54,7 +52,7 @@ const DetailProduct = () => {
   const [discReadMore, setdiscReadMore] = useState(false);
   const [showMoreBtn, setshowMoreBtn] = useState(false);
   const [mainImage, setmainImage] = useState(null);
-  const [selectedSize, setselectedSize] = useState([]);
+  const [selectedSize, setselectedSize] = useState('S');
   const [qty, setqty] = useState(1);
   const navigate = useNavigate();
 
@@ -118,7 +116,10 @@ const DetailProduct = () => {
               ref={imgRef}
               className="Card w-full h-[70%] md:h-full rounded-2xl    justify-center "
             >
-              <img src={mainImage} className=" h-[50vh] md:h-full object-cover" />
+              <img
+                src={mainImage}
+                className=" h-[50vh] md:h-full object-cover"
+              />
             </div>
 
             {/* 4️⃣ pics of same item*/}
@@ -182,7 +183,7 @@ const DetailProduct = () => {
             {/* Discription for AFTER Medium screen: */}
             <div className=" flex-col hidden md:block">
               <h4 className="text-black text-xl">Discription:</h4>
-              <p className="text-justify text-sm text-gray-500">
+              <p className="text-justify text-sm text-gray-500 font-sans">
                 {item.description}
               </p>
             </div>
@@ -215,12 +216,12 @@ const DetailProduct = () => {
             {/*quantity Buttons */}
             <div className="ENTER  flex flex-row gap-4 justify-center items-center md:border-b-2 border-gray-500 pb-3 md:pb-6">
               <button
-              ref={plusRef}
+                ref={plusRef}
                 onClick={() => {
                   setqty((prev) => (prev += 1));
-                  gsapAnimation()
+                  gsapAnimation();
                 }}
-                className="buttonAdd px-4 py-2 rounded-lg hover:rounded-sm transition-all duration-100 cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-thin hover:shadow-2xl"
+                className="buttonAdd px-4 py-2 rounded-lg hover:rounded-sm transition-all duration-100 cursor-pointer  bg-blue-500 hover:bg-blue-600 text-white font-thin hover:shadow-2xl"
               >
                 +
               </button>
@@ -234,7 +235,6 @@ const DetailProduct = () => {
 
               <button
                 onClick={() => setqty((prev) => (prev > 1 ? prev - 1 : prev))}
-
                 className="buttonAdd px-4 py-2 rounded-lg hover:rounded-sm transition-all duration-100 cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-thin hover:shadow-2xl"
               >
                 -

@@ -18,6 +18,7 @@ import Orders from "./Pages/Orders.jsx";
 import Cart from "./Pages/Cart.jsx";
 import DeliveryAddress from "./Pages/DeliveryAddress.jsx";
 import { RxDoubleArrowUp } from "react-icons/rx"; //icon
+import TrackOrder from "./Components/TrackOrder.jsx";
 
 const textColor = "#ef233c"; //main Color
 const bgColor = "#edf2f4"; //background Color
@@ -63,6 +64,7 @@ const App = () => {
           <Route path="/Orders" element={<Orders />}></Route>
           <Route path="/Cart" element={<Cart />}></Route>
           <Route path="/DeliveryAddress" element={<DeliveryAddress />}></Route>
+          <Route path="/TrackOrder/:id" element={<TrackOrder/>}></Route>
         </Routes>
 
         <Footer />

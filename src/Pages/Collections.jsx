@@ -79,10 +79,10 @@ const Collections = () => {
 
   return (
     <>
-      <div className=" py-2 sm:py-4  w-full   px-4 sm:px-8">
+      <div className=" py-2 sm:py-4  w-full   px-1 md:px-4 sm:px-8">
         <Link
         to={"/"}
-        className="w-full  text-sm  flex flex-nowrap justify-start items-center gap-2 text-gray-500 hover:text-black hover:font-semibold"
+        className="w-full  text-sm my-2 flex flex-nowrap justify-start items-center gap-2 text-gray-500 hover:text-black hover:font-semibold"
       >
         <BiArrowBack /> Home
       </Link>
@@ -158,7 +158,7 @@ const Collections = () => {
 
           {/* Collections--------- */}
           <div className="Collections  w-full md:w-[75%]">
-            <div className="BestSellerProducts w-full grid gap-4 grid-cols-2 md:grid-cols-[repeat(auto-fit,_minmax(220px,_1fr))]">
+            <div className="BestSellerProducts w-full grid gap-1 md:gap-4 grid-cols-2 md:grid-cols-[repeat(auto-fit,_minmax(220px,_1fr))]">
               {filteredProducts?.map((item, index) => (
                 <ProductDisplay
                   id={item.id}
@@ -171,6 +171,7 @@ const Collections = () => {
             </div>
           </div>
         </div>
+
       </div>
     </>
   );
