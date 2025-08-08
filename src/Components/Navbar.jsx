@@ -118,6 +118,7 @@ const Navbar = () => {
                 </span>
 
                 <Link
+                  to={'/Profile'}
                   onClick={() => setprofileOptions((prev) => !prev)}
                   className={`${
                     token ? "block" : "hidden"

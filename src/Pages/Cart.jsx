@@ -53,24 +53,35 @@ const Cart = () => {
           >
             <IoIosArrowRoundBack /> Contine Shopping
           </Link>
-          <div className="w-full  h-[70vh] md:h-[90vh]  flex justify-center items-center ">
-            <h2 className="text-gray-400">your Cart is empty ☹️</h2>
-          </div>
+        <div className="w-full h-[70vh] md:h-[90vh] flex flex-col items-center justify-center gap-4 px-4 text-center">
+  <h2 className="text-gray-500 text-lg md:text-2xl font-semibold">
+    🛒 Oops! Your cart's emptier than our weekend plans 😅
+  </h2>
+  <h2 className="text-gray-400 text-base md:text-lg">
+    keep shopping and fill it up!
+  </h2>
+  <div className="w-24 h-24 md:w-32 md:h-32 mt-2">
+    <img
+      src="images/shoppingBag.png"
+      alt="Shopping Bag"
+      className="w-full h-full object-contain animate-bounce"
+    />
+  </div>
+</div>
+
         </div>
       </>
     );
   } else {
     return (
       <>
-         <Link
-        to={"/Collections"}
-        className="w-full  text-sm  flex flex-nowrap justify-start items-center gap-2 text-gray-500 hover:text-black hover:font-semibold"
-      >
-        <BiArrowBack /> Continue shopping
-      </Link>
+        <Link
+          to={"/Collections"}
+          className="w-full  text-sm  flex flex-nowrap justify-start items-center gap-2 text-gray-500 hover:text-black hover:font-semibold"
+        >
+          <BiArrowBack /> Continue shopping
+        </Link>
         <div className="w-full min-h-dvh  flex flex-col gap-2 lg:flex-row">
-
-
           {/* ⬅️ */}
           <div className="left w-full lg:w-3/4 h-full  flex flex-col gap-3">
             <Title text1={"Your"} text2={"Shoping Cart"} />
@@ -87,7 +98,11 @@ const Cart = () => {
               >
                 {/* img and name */}
                 <div className="flex flex-col md:flex-row gap-2 justify-center items-center">
-                  <img src={item?.image?.[0]} alt="" className="w-25 rounded-sm" />
+                  <img
+                    src={item?.image?.[0]}
+                    alt=""
+                    className="w-25 rounded-sm"
+                  />
                   <h1 className="max-w-[130px]">{item.name}</h1>
                 </div>
 
@@ -97,18 +112,24 @@ const Cart = () => {
                     {item?.Sizes}
                     <span className="text-xs  text-gray-300 absolute left-[-250%] md:left-[-100%] md:top-[-100%]">
                       Size:
-                    </span> 
+                    </span>
                     {/* 🖋️ size edit span */}
-                    <span className=
-                    {`absolute right-[-150%] top-[20%] cursor-pointer text-gray-300 hover:text-gray-700`}>
-                      <CiEdit 
-                        onClick={()=>setsizeEditorId(prev => prev == null ? item.id : null)}
+                    <span
+                      className={`absolute right-[-150%] top-[20%] cursor-pointer text-gray-300 hover:text-gray-700`}
+                    >
+                      <CiEdit
+                        onClick={() =>
+                          setsizeEditorId((prev) =>
+                            prev == null ? item.id : null
+                          )
+                        }
                       />
                     </span>
-                   
+
                     <div
                       className={`${
-                        sizeEditorId === item.id  && location.pathname === "/Cart"
+                        sizeEditorId === item.id &&
+                        location.pathname === "/Cart"
                           ? "block z-1000"
                           : "hidden"
                       } absolute sizeEdit flex gap-2  flex-col justify-center items-center p-2`}
@@ -212,11 +233,11 @@ const Cart = () => {
             ))}
           </div>
 
-          {/* ➡️ */}
-          <div className="right w-full lg:w-1/4 h-full  flex gap-3 flex-col px-4">
+          {/* --------------------➡️-------------------------------- */}
+          <div className="right w-full lg:w-1/4   h-full  flex gap-3 flex-col px-4">
             <Title text1={"Grand"} text2={"Total"} />
 
-            <div className="bg-white px-6 py-8 h-[50vh] border-t border-gray-300 flex flex-col justify-center items-start gap-5 shadow-inner rounded-t-2xl md:gap-6">
+            <div className="bg-white px-6 md:py-8 py-4 md:h-[50vh] border-t border-gray-300 flex flex-col justify-center items-start gap-5 shadow-inner rounded-t-2xl md:gap-6">
               <div className="w-full flex flex-wrap  lg:flex-row justify-between text-gray-700 text-lg lg:text-xl font-medium">
                 <span className="flex flex-nowrap md:flex-wrap lg:flex-row justify-between">
                   Total:

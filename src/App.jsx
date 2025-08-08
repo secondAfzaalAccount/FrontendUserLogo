@@ -15,6 +15,7 @@ import { setProductsInStore } from "./Features/ProductSlice.js";
 import DetailProduct from "./Pages/DetailProduct.jsx";
 import Login from "./Components/Login.jsx";
 import Orders from "./Pages/Orders.jsx";
+import Profile from "./Pages/Profile.jsx";
 import Cart from "./Pages/Cart.jsx";
 import DeliveryAddress from "./Pages/DeliveryAddress.jsx";
 import { RxDoubleArrowUp } from "react-icons/rx"; //icon
@@ -48,12 +49,9 @@ const App = () => {
           <RxDoubleArrowUp size={24} />
         </button>
 
-        {/* <a href='.Navebar' className='topIcon fixed md:hidden  bottom-4 right-4  w-[15vw] h-[15vw] flex justify-center items-center rounded-full'><RxDoubleArrowUp /></a> */}
-        
         <ToastContainer position="top-right"/>
 
         <Navbar />
-
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/Collections" element={<Collections />}></Route>
@@ -65,6 +63,7 @@ const App = () => {
           <Route path="/Cart" element={<Cart />}></Route>
           <Route path="/DeliveryAddress" element={<DeliveryAddress />}></Route>
           <Route path="/TrackOrder/:id" element={<TrackOrder/>}></Route>
+          <Route path="/Profile" element={<Profile/>}></Route>
         </Routes>
 
         <Footer />
