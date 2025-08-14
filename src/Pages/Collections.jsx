@@ -11,6 +11,7 @@ const Collections = () => {
   const allProductsFromRedux = useSelector(
     (state) => state.mySlice.allProducts
   );
+
   const srchInputFromStore = useSelector((state) => state.mySlice.Search);
 
   const [AllProducts, setAllProducts] = useState(); //FIXME:
@@ -161,7 +162,8 @@ const Collections = () => {
             <div className="BestSellerProducts w-full grid gap-1 md:gap-4 grid-cols-2 md:grid-cols-[repeat(auto-fit,_minmax(220px,_1fr))]">
               {filteredProducts?.map((item, index) => (
                 <ProductDisplay
-                  id={item.id}
+                  id={item._id}
+                  key={item._id}
                   name={item.name}
                   quantity={item.quantity}
                   price={item.price}

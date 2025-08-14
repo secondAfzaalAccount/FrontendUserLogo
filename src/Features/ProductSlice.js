@@ -70,7 +70,7 @@ const productSlice = createSlice({
       }
     },
     deleteCartItem: (state, action) => {
-      const item = state.Cart.filter((i) => i.id !== action.payload);
+      const item = state.Cart.filter((i) => i._id !== action.payload);
       state.Cart = item;
       localStorage.setItem("Cart", JSON.stringify(state.Cart));
     },
@@ -79,7 +79,7 @@ const productSlice = createSlice({
       state.GrandTotalAmount = action.payload;
     },
     editSize: (state, action) => {
-      const item = state.Cart.find((i) => i.id == action.payload.id);
+      const item = state.Cart.find((i) => i._id == action.payload.id);
       if (item) {
         item.Sizes = action.payload.size;
       }

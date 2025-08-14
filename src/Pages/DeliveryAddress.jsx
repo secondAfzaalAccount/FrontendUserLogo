@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Title from "../Components/Title";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { GiCash } from "react-icons/gi"; //money icon
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,6 @@ const DeliveryAddress = () => {
   const Cart = useSelector((state) => state.mySlice.Cart);
 
   const amount = useSelector((state) => state.mySlice.GrandTotalAmount);
-  console.log(amount); //delte
   const [Method, setMethod] = useState("COD");
   const [loading, setloading] = useState(false);
   const [success, setsuccess] = useState(false);
@@ -41,6 +40,7 @@ const DeliveryAddress = () => {
   };
 
   const onSubmitHandler = async (e) => {
+    
     e.preventDefault();
     if (!token) {
       // no token mean not logedin. user login first

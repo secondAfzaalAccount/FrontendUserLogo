@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaGift } from "react-icons/fa6";
 import { FaBoxOpen } from "react-icons/fa";
 import { FaTruckFast } from "react-icons/fa6";
@@ -11,11 +11,24 @@ import Loader from "../Components/Loader.jsx";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { gsap } from "gsap";
+
 
 const TrackOrder = () => {
   const token = useSelector((state) => state.mySlice.token);
   const { id } = useParams();
   const [loading, setloading] = useState(false);
+  const HeroRef = useRef([]); //for gsap
+
+    useEffect(() => {
+    gsap.from(HeroRef.current, {
+      x: -90,
+      duration: 0.6,
+      stagger:0.3,
+      scale:0,
+       ease: "power2.out", 
+    });
+  }, []);
 
   const [nanoID, setnanoID] = useState(null); // currect nano id
   const [status, setstatus] = useState(""); // currect order details
@@ -59,7 +72,7 @@ const TrackOrder = () => {
           to={"/Orders"}
           className="w-full  text-sm my-2 flex flex-nowrap justify-start items-center gap-2 text-gray-500 hover:text-black hover:font-semibold"
         >
-          <BiArrowBack /> Home
+          <BiArrowBack /> Back
         </Link>
 
         <Title text1={"Track"} text2={"Order"} />
@@ -70,6 +83,7 @@ const TrackOrder = () => {
         <div className=" w-full h-[80vh]  m-4 mt-0 justify-start gap-5 flex lg:justify-around items-start flex-col xl:flex-row ">
           {/*✅ Order Placed */}
           <div
+          ref={(el) => (HeroRef.current[0] = el)}
             className={`${
               status === "Order Placed" ||
               status === "Out for Delivery" ||
@@ -80,7 +94,7 @@ const TrackOrder = () => {
           >
             <span
               className={`${
-                status === "Order Placed" || "Out for Delivery"
+                status === "Order Placed" || status ==="Out for Delivery" || status === "Delivered"
                   ? "bg-[var(--main-color)] text-white"
                   : "opacity-30"
               } rounded-[50%] w-7 h-7 text-sm md:text-base flex justify-center items-center text-gray-400 border-[2px] border-[var(--main-color)]`}
@@ -110,23 +124,24 @@ const TrackOrder = () => {
 
           {/* 📦 Out for Delivery */}
           <div
+          ref={(el) => (HeroRef.current[1] = el)}
             className={`${
               status === "Out for Delivery" || status === "Delivered"
                 ? ""
-                : "opacity-30 select-none"
+                : "opacity-10 select-none"
             } justify-center items-center  m-1 lg:min-h-32 h-40 md:m-4 p-4 w-full xl:w-1/3 rounded-md border-2  flex gap-6`}
           >
             <span
               className={`${
-                status === "Order Placed" || "Out for Delivery"
+                status === "Out for Delivery" || status === "Delivered"
                   ? "bg-[var(--main-color)] text-white"
-                  : "opacity-30"
+                  : "opacity-30 "
               } rounded-[50%] w-7 h-7 text-sm md:text-base flex justify-center items-center text-gray-400 border-[2px] border-[var(--main-color)]`}
             >
               {status === "Order Placed" || "Out for Delivery" ? (
                 <MdOutlineDone />
               ) : (
-                1
+                2
               )}
             </span>
 
@@ -148,13 +163,15 @@ const TrackOrder = () => {
 
           {/* 📬 Delivered */}
           <div
+          ref={(el) => (HeroRef.current[2] = el)}
             className={`${
-              status === "Delivered" ? "" : "opacity-30 select-none"
+              status === "Delivered" ? "" : "opacity-10 select-none"
             } justify-center items-center  w-full h-40 lg:min-h-32 xl:w-1/3 m-1 md:m-4 p-4 rounded-md border-2  flex gap-6`}
           >
+            
             <span
               className={`${
-                status === "Order Placed" || "Out for Delivery"
+                status === "Delivered" 
                   ? "bg-[var(--main-color)] text-white"
                   : "opacity-30"
               } rounded-[50%] w-7 h-7 text-sm md:text-base flex justify-center items-center text-gray-400 border-[2px] border-[var(--main-color)]`}
@@ -162,7 +179,7 @@ const TrackOrder = () => {
               {status === "Order Placed" || "Out for Delivery" ? (
                 <MdOutlineDone />
               ) : (
-                1
+                2
               )}
             </span>
 

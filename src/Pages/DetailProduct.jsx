@@ -12,8 +12,6 @@ const DetailProduct = () => {
   const plusRef = useRef(null);
 
   const gsapAnimation = () => {
-    console.log("gsap animation ...");
-
     const img = imgRef.current;
     const plus = plusRef.current;
 
@@ -46,13 +44,18 @@ const DetailProduct = () => {
     });
   };
 
-  const params = useParams();
-  const allProducts = useSelector((state) => state.mySlice.allProducts);
-  const Product = allProducts?.filter((item) => item.id == params.id);
+  const AllProducts = useSelector((state) => state.mySlice.allProducts) || [];
+
+  const params = useParams(); //id from last page
+
+  const Product = AllProducts.filter((item) => item._id === params.id);
+  console.log(Product);
+  
+
   const [discReadMore, setdiscReadMore] = useState(false);
   const [showMoreBtn, setshowMoreBtn] = useState(false);
   const [mainImage, setmainImage] = useState(null);
-  const [selectedSize, setselectedSize] = useState('S');
+  const [selectedSize, setselectedSize] = useState("");
   const [qty, setqty] = useState(1);
   const navigate = useNavigate();
 
@@ -61,7 +64,7 @@ const DetailProduct = () => {
 
   const cartHandler = (item) => {
     if (selectedSize.length === 0) {
-      toast.info("please select size");
+      toast.info("please select size S, M, LG");
       return;
     } else {
       const updatedItem = {
@@ -122,13 +125,13 @@ const DetailProduct = () => {
               />
             </div>
 
-            {/* 4️⃣ pics of same item*/}
+            {/* 4️⃣ four other pics of same item*/}
             <div
               className={` other4Pic  w-1/4 md:w-2/4  flex flex-col  flex-nowrap gap-6 justify-center items-center md:p-4`}
             >
               <div
                 onClick={() => setmainImage(Product[0].image[0])}
-                className="img1 rounded-sm  hover:shadow-2xl  flex justify-center items-center hover:border-2 cursor-pointer bg-white border-[1px]  border-gray-500   h-15 w-15  md:h-25 md:w-25"
+               className="img2 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2 cursor-pointer   border-gray-500   h-15 w-15 md:h-25 md:w-25 "
               >
                 <img
                   src={item.image[0]}
@@ -139,7 +142,7 @@ const DetailProduct = () => {
 
               <div
                 onClick={() => setmainImage(Product[0].image[1])}
-                className="img2 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2 cursor-pointer bg-white border-[1px]  border-gray-500   h-15 w-15 md:h-25 md:w-25 "
+                className="img2 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2 cursor-pointer   border-gray-500   h-15 w-15 md:h-25 md:w-25 "
               >
                 <img
                   src={item.image[1] || item.image[0]}
@@ -150,7 +153,7 @@ const DetailProduct = () => {
 
               <div
                 onClick={() => setmainImage(Product[0].image[2])}
-                className="img3 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2 cursor-pointer bg-white border-[1px]  border-gray-500   h-15 w-15 md:h-25 md:w-25 "
+               className="img4 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2  cursor-pointer   h-15 w-15 md:h-25 md:w-25"
               >
                 <img
                   src={item.image[2] || item.image[0]}
@@ -161,7 +164,7 @@ const DetailProduct = () => {
 
               <div
                 onClick={() => setmainImage(Product[0].image[3])}
-                className="img4 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2 cursor-pointer bg-white border-[1px]  border-gray-500   h-15 w-15 md:h-25 md:w-25 "
+                className="img4 rounded-sm hover:shadow-2xl flex justify-center items-center hover:border-2  cursor-pointer   h-15 w-15 md:h-25 md:w-25"
               >
                 <img
                   src={item.image[3] || item.image[0]}
@@ -192,7 +195,7 @@ const DetailProduct = () => {
             <div className=" flex-col md:my-2">
               <h4 className="text-black text-xl">Sizes:</h4>
               <div className="allSizes flex justify-center items-center text-xl gap-3">
-                {item.Sizes.map((size, index) => (
+                {item.sizes.map((size, index) => (
                   <input
                     key={size}
                     type="button"
@@ -202,7 +205,7 @@ const DetailProduct = () => {
                       selectedSize === size
                         ? "bg-[var(--main-color)] text-white"
                         : "bg-transparent "
-                    } rounded-3xl active:scale-90 hover:bg-black/70 hover:text-white text-gray-500 cursor-pointer hover:shadow-2xl py-1 md:py-2 px-4`}
+                    } border-[1px] active:scale-90 hover:bg-black/70 hover:text-white text-gray-500 cursor-pointer hover:shadow-2xl py-1 md:py-2 px-4`}
                   />
                 ))}
               </div>
@@ -244,7 +247,7 @@ const DetailProduct = () => {
             <button
               onClick={() => cartHandler(item)}
               to={"/Cart"}
-              className="blackAddtoCart w-full lg:w-auto cursor-pointer text-xl flex gap-3 justify-center focus:scale-95 active:scale-90 items-center hover:bg-gray-500 px-8 py-3 pointer-coarse: hover:shadow-2xl bg-black text-white rounded-sm "
+              className="blackAddtoCart w-full lg:w-auto cursor-pointer text-xl flex gap-3 justify-center focus:scale-95 active:scale-90 items-center bg-gray-500 px-8 py-3 pointer-coarse: hover:shadow-2xl hover:bg-black text-white rounded-sm "
             >
               <span className="CartIcon">
                 <CiShoppingCart />

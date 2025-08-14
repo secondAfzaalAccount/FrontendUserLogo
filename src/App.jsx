@@ -1,7 +1,5 @@
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./Components/Footer";
@@ -20,6 +18,9 @@ import Cart from "./Pages/Cart.jsx";
 import DeliveryAddress from "./Pages/DeliveryAddress.jsx";
 import { RxDoubleArrowUp } from "react-icons/rx"; //icon
 import TrackOrder from "./Components/TrackOrder.jsx";
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import { BiErrorAlt } from "react-icons/bi";
 
 const textColor = "#ef233c"; //main Color
 const bgColor = "#edf2f4"; //background Color
@@ -30,10 +31,21 @@ const App = () => {
     (state) => state.mySlice.allProducts
   );
 
-  useEffect(() => {
-    if (allProducts) {
-      disptach(setProductsInStore(allProducts)); //puting allproducts in Redux Store
+  const fetchAllProductHandler = async () => {
+    try {
+      const respose = await axios.get(
+        `${import.meta.env.VITE_BACKEND_API}/api/product/list`
+      );
+
+      if (respose.data.success) {
+        disptach(setProductsInStore(respose.data.allProducts)); //puting allproducts in Redux Store
+      }
+    } catch (error) {
+      toast.error(error.message)
     }
+  };
+  useEffect(() => {
+    fetchAllProductHandler();
   }, []);
 
   return (
@@ -49,7 +61,7 @@ const App = () => {
           <RxDoubleArrowUp size={24} />
         </button>
 
-        <ToastContainer position="top-right"/>
+        <ToastContainer position="top-right" />
 
         <Navbar />
         <Routes>
@@ -62,8 +74,8 @@ const App = () => {
           <Route path="/Orders" element={<Orders />}></Route>
           <Route path="/Cart" element={<Cart />}></Route>
           <Route path="/DeliveryAddress" element={<DeliveryAddress />}></Route>
-          <Route path="/TrackOrder/:id" element={<TrackOrder/>}></Route>
-          <Route path="/Profile" element={<Profile/>}></Route>
+          <Route path="/TrackOrder/:id" element={<TrackOrder />}></Route>
+          <Route path="/Profile" element={<Profile />}></Route>
         </Routes>
 
         <Footer />

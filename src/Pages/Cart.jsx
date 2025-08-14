@@ -97,10 +97,10 @@ const Cart = () => {
                 className="relative w-full flex gap-2 items-center justify-around text-base border-b-[1px] border-gray-300 shadow-2xl p-4 rounded-sm"
               >
                 {/* img and name */}
-                <div className="flex flex-col md:flex-row gap-2 justify-center items-center">
+                <div className="flex flex-col md:flex-row gap-2 md:gap-4 fonts justify-center items-center">
                   <img
                     src={item?.image?.[0]}
-                    alt=""
+                    alt="Product Image"
                     className="w-25 rounded-sm"
                   />
                   <h1 className="max-w-[130px]">{item.name}</h1>
@@ -119,16 +119,14 @@ const Cart = () => {
                     >
                       <CiEdit
                         onClick={() =>
-                          setsizeEditorId((prev) =>
-                            prev == null ? item.id : null
-                          )
+                          setsizeEditorId(item._id)
                         }
                       />
                     </span>
 
                     <div
                       className={`${
-                        sizeEditorId === item.id &&
+                        sizeEditorId === item._id &&
                         location.pathname === "/Cart"
                           ? "block z-1000"
                           : "hidden"
@@ -136,56 +134,89 @@ const Cart = () => {
                     >
                       <h3
                         onClick={() => {
-                          dispatch(editSize({ id: item.id, size: "S" }));
+                          dispatch(editSize({ id: item._id, size: "S" }));
                           setsizeEditorId(null);
                         }}
                         className={`${
                           item.Sizes === "S"
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
                             : "text-black"
-                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] `}
+                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
+                        ${item.sizes.includes('S') ? '' : 'hidden'}`}
                       >
                         S
                       </h3>
                       <h3
                         onClick={() => {
-                          dispatch(editSize({ id: item.id, size: "M" }));
+                           dispatch(editSize({ id: item._id, size: "M" }));
                           setsizeEditorId(null);
                         }}
                         className={`${
                           item.Sizes === "M"
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
                             : "text-black"
-                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px]`}
+                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px]
+                        ${item.sizes.includes('M') ? '' : 'hidden'}`}
                       >
                         M
                       </h3>
                       <h3
                         onClick={() => {
-                          dispatch(editSize({ id: item.id, size: "L" }));
+                          dispatch(editSize({ id: item._id, size: "L" }));
                           setsizeEditorId(null);
                         }}
                         className={`${
                           item.Sizes === "L"
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
                             : "text-black"
-                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] `}
+                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
+                        ${item.sizes.includes('L') ? '' : 'hidden'}`}
                       >
                         L
                       </h3>
-                      <h3
+                       <h3
                         onClick={() => {
-                          dispatch(editSize({ id: item.id, size: "XL" }));
+                           dispatch(editSize({ id: item._id, size: "XL" }));
                           setsizeEditorId(null);
                         }}
                         className={`${
                           item.Sizes === "XL"
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
                             : "text-black"
-                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] `}
+                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
+                        ${item.sizes.includes('XL') ? '' : 'hidden'}`}
                       >
                         XL
                       </h3>
+                      <h3
+                        onClick={() => {
+                           dispatch(editSize({ id: item._id, size: "XXL" }));
+                          setsizeEditorId(null);
+                        }}
+                        className={`${
+                          item.Sizes === "XXL"
+                            ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
+                            : "text-black"
+                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
+                        ${item.sizes.includes('XXL') ? '' : 'hidden'}`}
+                      >
+                        XXL
+                      </h3>
+                      <h3
+                        onClick={() => {
+                           dispatch(editSize({ id: item._id, size: "3XL" }));
+                          setsizeEditorId(null);
+                        }}
+                        className={`${
+                          item.Sizes === "3XL"
+                            ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
+                            : "text-black"
+                        } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
+                        ${item.sizes.includes('3XL') ? '' : 'hidden'}`}
+                      >
+                        3XL
+                      </h3>
+                     
                     </div>
                   </h2>
 
@@ -224,7 +255,7 @@ const Cart = () => {
 
                 {/* delete x */}
                 <button
-                  onClick={() => deleteHandler(item.id)}
+                  onClick={() => deleteHandler(item._id)}
                   className=" absolute right-5 top-2 lg:top-[40%] text-gray-400 text-xl  md:text-2xl hover:text-[var(--main-color)] cursor-pointer"
                 >
                   <MdDelete />
