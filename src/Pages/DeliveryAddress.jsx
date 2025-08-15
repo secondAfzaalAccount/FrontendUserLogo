@@ -89,7 +89,7 @@ const DeliveryAddress = () => {
         <form
           noValidate
           onSubmit={(e) => onSubmitHandler(e)}
-          className="flex relative flex-col w-full sm:flex-row mb-4 justify-around gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t"
+          className="flex relative flex-col w-full sm:flex-row mb-4  justify-around gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t"
         >
           <div className={`${success ? "block" : "hidden"}`}>
             <CustomToast />
@@ -109,7 +109,7 @@ const DeliveryAddress = () => {
                   name="FirstName"
                   value={formData.FirstName}
                   type="text"
-                  className="border border-gray-300 rounded py-1.5  px-3.5 w-full "
+                  className="border border-gray-300 rounded py-1.5  px-3.5 w-full text-[var(--heading-color)] placeholder:text-gray-500"
                   placeholder="First Name"
                 />
 
@@ -119,7 +119,7 @@ const DeliveryAddress = () => {
                   name="LastName"
                   value={formData.LastName}
                   type="text"
-                  className="border border-gray-300 rounded py-1.5  px-3.5 w-full "
+                  className="border border-gray-300 rounded py-1.5  px-3.5 w-full text-[var(--heading-color)] placeholder:text-gray-500 "
                   placeholder="Last Name"
                 />
               </div>
@@ -130,7 +130,7 @@ const DeliveryAddress = () => {
                 name="Email"
                 value={formData.Email}
                 type="email"
-                className="border border-gray-300 rounded py-1.5  px-3.5 w-full "
+                className="border border-gray-300 rounded py-1.5  px-3.5 w-full text-[var(--heading-color)] placeholder:text-gray-500"
                 placeholder="Email address"
               />
 
@@ -140,7 +140,7 @@ const DeliveryAddress = () => {
                 name="Street"
                 value={formData.Street}
                 type="text"
-                className="border border-gray-300 rounded py-1.5  px-3.5 w-full "
+                className="border border-gray-300 rounded py-1.5  px-3.5 w-full text-[var(--heading-color)] placeholder:text-gray-500"
                 placeholder="Street"
               />
 
@@ -152,7 +152,7 @@ const DeliveryAddress = () => {
                   name="City"
                   value={formData.City}
                   type="text"
-                  className="border border-gray-300 rounded py-1.5  px-3.5 w-full "
+                  className="border border-gray-300 rounded py-1.5  px-3.5 w-full text-[var(--heading-color)] placeholder:text-gray-500"
                   placeholder="City"
                 />
 
@@ -162,7 +162,7 @@ const DeliveryAddress = () => {
                   name="Province"
                   // value={formData.State}
                   type="text"
-                  className="border border-gray-300 rounded py-1.5  px-3.5 w-full "
+                  className="border border-gray-300 rounded py-1.5  px-3.5 w-full text-[var(--heading-color)] placeholder:text-gray-500"
                   placeholder="Province"
                 />
               </div>
@@ -175,7 +175,7 @@ const DeliveryAddress = () => {
                   name="ZipCode"
                   value={formData.ZipCode}
                   type="number"
-                  className="border border-gray-300 rounded py-1.5  px-3.5 w-full "
+                  className="border border-gray-300 rounded py-1.5  px-3.5 w-full text-[var(--heading-color)] placeholder:text-gray-500"
                   placeholder="ZipCode"
                 />
 
@@ -185,7 +185,7 @@ const DeliveryAddress = () => {
                   name="Country"
                   // value={formData.Country}
                   type="text"
-                  className="border border-gray-300 rounded py-1.5  px-3.5 w-full "
+                  className="border border-gray-300 rounded py-1.5  px-3.5 w-full text-[var(--heading-color)] placeholder:text-gray-500"
                   placeholder="Country"
                 />
               </div>
@@ -196,7 +196,7 @@ const DeliveryAddress = () => {
                 name="Phone"
                 value={formData.Phone}
                 type="phone"
-                className="border border-gray-300 rounded py-1.5  px-3.5 w-full "
+                className="border border-gray-300 rounded py-1.5  px-3.5 w-full text-[var(--heading-color)] placeholder:text-gray-500"
                 placeholder="Phone"
               />
             </div>
@@ -208,8 +208,8 @@ const DeliveryAddress = () => {
 
             {/* Payment Method Selection */}
 
-            {/* Easy Paisa */}
-            <div className="flex gap-3 mt-6">
+            {/* Easy Paisa //TODO:*/} 
+            <div className="flex gap-3 mt-6 hidden">
               <div
                 onClick={() => setMethod("easyPaisa")}
                 className="flex cursor-pointer  py-2 items-center w-2/4 h-14 rounded justify-center px-2 gap-1 border border-gray-300 flex-row"
@@ -223,7 +223,7 @@ const DeliveryAddress = () => {
                   src="/images/Easypaisa_Logo-removebg-preview.png
             "
                   alt="easypaisa"
-                  className="h-full"
+                  className="h-full bg-[#edf2f4] rounded-md"
                 />
               </div>
             </div>
@@ -236,11 +236,11 @@ const DeliveryAddress = () => {
               <p
                 className={`${
                   Method === "COD" ? "bg-green-500 " : ""
-                } cursor-pointer min-w-3.5 h-3.5 border rounded-full border-gray-300`}
+                } ] cursor-pointer min-w-3.5 h-3.5 border rounded-full border-gray-300`}
               ></p>
-              <h2 className="flex gap-3 justify-center items-center">
-                {" "}
-                Cash On Delivery <GiCash />
+              <h2 className="flex gap-3 justify-center items-center text-[var(--heading-color)]">
+              
+                Cash On Delivery <GiCash className="text-[var(--heading-color)]"/>
               </h2>
             </div>
 

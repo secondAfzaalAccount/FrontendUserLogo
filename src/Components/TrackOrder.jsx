@@ -76,7 +76,7 @@ const TrackOrder = () => {
         </Link>
 
         <Title text1={"Track"} text2={"Order"} />
-        <p className="m-1 md:m-4 font-semibold">
+        <p className="m-1 md:m-4 font-semibold text-[var(--heading-color)]">
           Your Order No: <span className="text-gray-400">{nanoID}</span>{" "}
         </p>
 
@@ -90,7 +90,7 @@ const TrackOrder = () => {
               status === "Delivered"
                 ? ""
                 : "opacity-30"
-            } justify-center items-center m-1 lg:min-h-32 h-40 md:m-4 p-4 w-full xl:w-1/3  rounded-md border-2  flex gap-6 `}
+            } justify-center items-center m-1 lg:min-h-32 h-40 md:m-4 p-4 w-full xl:w-1/3  rounded-md border-2  border-[var(--heading-color)] flex gap-6 `}
           >
             <span
               className={`${
@@ -100,23 +100,23 @@ const TrackOrder = () => {
               } rounded-[50%] w-7 h-7 text-sm md:text-base flex justify-center items-center text-gray-400 border-[2px] border-[var(--main-color)]`}
             >
               {status === "Order Placed" || "Out for Delivery" ? (
-                <MdOutlineDone />
+                <MdOutlineDone className=""/>
               ) : (
                 1
               )}
             </span>
             <div className="text-4xl md:text-8xl flex justify-center items-center">
-              <FaGift className="w-full h-full" />
+              <FaGift className="w-full h-full text-[var(--heading-color)]" />
             </div>
 
             <div className="w-[60%] flex flex-col justify-start items-start">
-              <h2 className="text-lg md:text-xl font-bold text-gray-700 whitespace-nowrap">
+              <h2 className="text-lg md:text-xl font-bold  whitespace-nowrap text-[var(--heading-color)]">
                 ORDER PLACED
               </h2>
               <h3 className=" w-full text-gray-400 text-sm leading-4 my-2">
                 Your order placed successfully.
               </h3>
-              <h3 className="flex text-gray-700 font-semibold text-base whitespace-nowrap">
+              <h3 className="flex  font-semibold text-base whitespace-nowrap text-[var(--heading-color)]">
                 Estimate Time: 6 days.
               </h3>
             </div>
@@ -129,7 +129,7 @@ const TrackOrder = () => {
               status === "Out for Delivery" || status === "Delivered"
                 ? ""
                 : "opacity-10 select-none"
-            } justify-center items-center  m-1 lg:min-h-32 h-40 md:m-4 p-4 w-full xl:w-1/3 rounded-md border-2  flex gap-6`}
+            } justify-center items-center  m-1 lg:min-h-32 h-40 md:m-4 p-4 w-full xl:w-1/3 rounded-md border-2  border-[var(--heading-color)] flex gap-6`}
           >
             <span
               className={`${
@@ -146,16 +146,16 @@ const TrackOrder = () => {
             </span>
 
             <div className="text-4xl md:text-8xl flex justify-center items-center">
-              <FaTruckFast className="w-full h-full" />
+              <FaTruckFast className="w-full h-full text-[var(--heading-color)]" />
             </div>
             <div className="w-[60%] flex flex-col justify-start items-start">
-              <h2 className="text-lg md:text-xl font-bold text-gray-700  whitespace-nowrap">
+              <h2 className="text-lg md:text-xl font-bold text-[var(--heading-color)]  whitespace-nowrap">
                 OUT FOR DELIVERY
               </h2>
               <h3 className="  w-full gap-2 text-gray-400 text-sm leading-4 my-2">
                 Your order is one the way and will be delivered shortly.
               </h3>
-              <h3 className="flex text-gray-700 font-semibold text-base">
+              <h3 className="flex text-[var(--heading-color)] font-semibold text-base">
                 Estimate Time: 3 days.
               </h3>
             </div>
@@ -166,7 +166,7 @@ const TrackOrder = () => {
           ref={(el) => (HeroRef.current[2] = el)}
             className={`${
               status === "Delivered" ? "" : "opacity-10 select-none"
-            } justify-center items-center  w-full h-40 lg:min-h-32 xl:w-1/3 m-1 md:m-4 p-4 rounded-md border-2  flex gap-6`}
+            } justify-center items-center  w-full h-40 lg:min-h-32 xl:w-1/3 m-1 md:m-4 p-4 rounded-md border-2  border-[var(--heading-color)] flex gap-6`}
           >
             
             <span
@@ -184,17 +184,17 @@ const TrackOrder = () => {
             </span>
 
             <div className="text-4xl md:text-8xl flex justify-center items-center">
-              <FaBoxOpen className="w-full h-full" />
+              <FaBoxOpen className="w-full h-full text-[var(--heading-color)]" />
             </div>
 
             <div className="w-[60%] flex flex-col justify-start items-start">
-              <h2 className="text-lg md:text-xl font-bold text-gray-700 whitespace-nowrap">
+              <h2 className="text-lg md:text-xl font-bold text-[var(--heading-color)] whitespace-nowrap">
                 PRODUCT DELIVERED
               </h2>
               <h3 className=" text-gray-400 text-sm leading-4 my-2">
                 Your order has been delivered.
               </h3>
-              <h3 className="flex text-gray-700 font-semibold text-base">
+              <h3 className="flex text-[var(--heading-color)] font-semibold text-base">
                 Estimate Time: 6 days.
               </h3>
             </div>

@@ -22,8 +22,7 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import { BiErrorAlt } from "react-icons/bi";
 
-const textColor = "#ef233c"; //main Color
-const bgColor = "#edf2f4"; //background Color
+
 
 const App = () => {
   const disptach = useDispatch();
@@ -51,8 +50,8 @@ const App = () => {
   return (
     <>
       <div
-        className="mainContainer p-4  sm:p-12 sm:pt-5 flex flex-col justify-start items-center text-sm sm:text-xl w-full min-h-screen bg-[#edf2f4]"
-        style={{ "--main-color": textColor, "--bg-color": bgColor }}
+        className="mainContainer p-4  sm:p-12 sm:pt-5 flex flex-col justify-start items-center text-sm sm:text-xl w-full min-h-screen bg-[var(--bg-color)]"
+        
       >
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

@@ -142,7 +142,7 @@ const Login = () => {
     return (
       <>
         <div className="h-[80vh] w-full p-4  flex flex-col justify-center items-center ">
-          <h1 className="font-[LoginFont]  m-12 sm:m-9 text-4xl md:text-6xl ">
+          <h1 className="font-[LoginFont]  m-12 sm:m-9 text-4xl md:text-6xl text-[var(--heading-color)] ">
             {login ? "LogIn" : "SignUp"}
           </h1>
 
@@ -163,7 +163,9 @@ const Login = () => {
               } w-full px-4 py-2 outline-0 rounded-xl `}
               style={{
                 background: "#EDF2F4",
-                boxShadow: "11px 11px 28px #c9cecf, -11px -11px 28px #ffffff",
+                boxShadow: document.documentElement.classList.contains("dark")
+                  ? "6px 6px 12px #b0b0b0, -6px -6px 12px #ffffff" // softer shadow for dark mode
+                  : "11px 11px 28px #c9cecf, -11px -11px 28px #ffffff", // original light mode shadow
               }}
             />
 
@@ -175,18 +177,22 @@ const Login = () => {
               required
               placeholder="Email"
               className={` w-full px-4 py-2 outline-0 rounded-xl`}
-              style={{
+                style={{
                 background: "#EDF2F4",
-                boxShadow: "11px 11px 28px #c9cecf, -11px -11px 28px #ffffff",
+                boxShadow: document.documentElement.classList.contains("dark")
+                  ? "6px 6px 12px #b0b0b0, -6px -6px 12px #ffffff" // softer shadow for dark mode
+                  : "11px 11px 28px #c9cecf, -11px -11px 28px #ffffff", // original light mode shadow
               }}
             />
 
             {/* ---------Password + (eye icon) */}
             <div
               className="flex justify-between px-4 py-2 items-center gap-2 rounded-xl w-full "
-              style={{
+                style={{
                 background: "#EDF2F4",
-                boxShadow: "11px 11px 28px #c9cecf, -11px -11px 28px #ffffff",
+                boxShadow: document.documentElement.classList.contains("dark")
+                  ? "6px 6px 12px #b0b0b0, -6px -6px 12px #ffffff" // softer shadow for dark mode
+                  : "11px 11px 28px #c9cecf, -11px -11px 28px #ffffff", // original light mode shadow
               }}
             >
               <input

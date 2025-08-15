@@ -18,12 +18,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addcurrentUser, logout, SEARCHINPUT } from "../Features/ProductSlice";
 import { toast } from "react-toastify";
 
-
 const Navbar = () => {
   const Cart = useSelector((state) => state.mySlice.Cart);
   const token = useSelector((state) => state.mySlice.token);
   const currentUser = useSelector((state) => state.mySlice.currentUser);
-  
+
+  const [dark, setDark] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -35,17 +35,43 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const TotalItems = Cart.reduce((acc, item) => acc + item.quantity, 0);
 
+  useEffect(() => {
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches; //as user OS theme
+    setDark(prefersDark); //true or false
+    document.documentElement.classList.toggle("dark", prefersDark);
+  }, []);
+
+  const toggleDark = () => {
+    setDark(!dark);
+    document.documentElement.classList.toggle("dark", !dark);
+  };
   return (
     <>
       <div className="w-full flex flex-col gap-3">
         <div className="Navebar text-gray-500  w-full flex justify-between border-b-[1px] border-gray-300 pb-3">
-          <div className="div1 font-[logoFont]  text-2xl">Logo.</div>
+          <div className="div1 font-[logoFont] flex justify-center items-center gap-2 md:gap-7 text-2xl">
+            <h1 className="text-[var(--heading-color)]">Logo.</h1>
+
+            <div
+              onClick={() => toggleDark()}
+              title="Theme"
+              className="relative w-6 md:w-9 h-3 md:h-5 bg-[var(--main-color)] rounded-2xl cursor-pointer hover:shadow-xl"
+            >
+              <span
+                className={`absolute w-2 md:w-3 h-2 md:h-3 top-0.5 md:top-1 left-1 rounded-full transition-all duration-500 bg-[var(--bg-color)] ${
+                  dark ? "left-3.5 md:left-5" : ""
+                }`}
+              ></span>
+            </div>
+          </div>
 
           <div className="hidden md:flex gap-6 cursor-pointer font-family-[Poppins]">
             <Link
               to={"/"}
               className={`${
-                location.pathname === "/" ? "text-[var(--main-color)]" : ""
+                location.pathname === "/" ? "text-[var(--main-color)]" : "text-[var(--heading-color)]"
               }  hover:-translate-y-2 transition-all duration-200`}
             >
               Home
@@ -55,7 +81,7 @@ const Navbar = () => {
               className={`${
                 location.pathname === "/Collections"
                   ? "text-[var(--main-color)]"
-                  : ""
+                  : "text-[var(--heading-color)]"
               } hover:-translate-y-2 transition-all duration-200`}
             >
               Collections
@@ -63,7 +89,7 @@ const Navbar = () => {
             <Link
               to={"/About"}
               className={`${
-                location.pathname === "/About" ? "text-[var(--main-color)]" : ""
+                location.pathname === "/About" ? "text-[var(--main-color)]" : "text-[var(--heading-color)]"
               }  hover:-translate-y-2 transition-all duration-200`}
             >
               About
@@ -73,7 +99,7 @@ const Navbar = () => {
               className={`${
                 location.pathname === "/Contact"
                   ? "text-[var(--main-color)]"
-                  : ""
+                  : "text-[var(--heading-color)]"
               }  hover:-translate-y-2 transition-all duration-200`}
             >
               Contact Us
@@ -92,15 +118,18 @@ const Navbar = () => {
             <div title="User Options" className="relative">
               <div className="NameAndProfile  flex justify-center items-center">
                 <h2
-                onClick={()=>setprofileOptions((prev) => !prev)}
-                 className={` text-[var(--main-color)] font-semibold text-sm`}>{` ${currentUser ? "Hi! "+currentUser.toUpperCase(): ''}`}</h2>
+                  onClick={() => setprofileOptions((prev) => !prev)}
+                  className={` text-[var(--main-color)]  font-semibold text-xs md:text-sm`}
+                >{` ${
+                  currentUser ? "Hi! " + currentUser.toUpperCase() : ""
+                }`}</h2>
                 <CiUser
                   onClick={() => {
                     setprofileOptions((prev) => !prev);
                   }}
                   className={`${
                     profileOptions ? "text-[var(--main-color)]" : ""
-                  } text-xl sm:text-2xl cursor-pointer transition-all duration-200 hover:text-black hover:scale-110"`}
+                  } text-xl sm:text-2xl cursor-pointer transition-all duration-200 hover:text-[var(--heading-color)] hover:scale-110"`}
                 />
               </div>
 
@@ -118,13 +147,13 @@ const Navbar = () => {
                 </span>
 
                 <Link
-                  to={'/Profile'}
+                  to={"/Profile"}
                   onClick={() => setprofileOptions((prev) => !prev)}
                   className={`${
                     token ? "block" : "hidden"
                   } options px-6 py-2 flex gap-4  justify-start items-center rounded-sm pointer-coarse text-balance hover:text-[var(--main-color)]`}
                 >
-                  <CgProfile /> Profile
+                  <CgProfile className="" /> Profile
                 </Link>
 
                 <Link
@@ -163,7 +192,7 @@ const Navbar = () => {
                     location.pathname === "/Cart"
                       ? "text-[var(--main-color)]"
                       : ""
-                  } text-xl sm:text-2xl cursor-pointer transition-all duration-200 hover:text-black hover:scale-110"`}
+                  } text-xl sm:text-2xl cursor-pointer transition-all duration-200 hover:text-[var(--heading-color)] hover:scale-110"`}
                 />
                 <h2
                   className={`${
@@ -180,7 +209,7 @@ const Navbar = () => {
             <button
               onClick={() => {
                 dispatch(logout());
-                dispatch(addcurrentUser(''))
+                dispatch(addcurrentUser(""));
                 toast.success("👋 successfully logged out.", {
                   hideProgressBar: false,
                   closeOnClick: true,
@@ -190,17 +219,17 @@ const Navbar = () => {
               }}
               className={`${
                 token ? "block" : "hidden"
-              } md:bg-red-500 text-xl  hover:shadow-2xl cursor-pointer hover:scale-105 text-gray-500  md:text-white rounded-md px-4 py-2  text-balance flex justify-center items-center gap-2"`}
+              } md:bg-red-500 text-xl  hover:shadow-2xl cursor-pointer hover:scale-105 text-gray-500  md:text-white rounded-md px-4 py-2  text-balance flex justify-center items-center gap-3`}
             >
               <h1 className="hidden md:block">Logout</h1>
-              <IoLogOutOutline className="md:text-2xl" />
+              <IoLogOutOutline className="md:text-2xl hover:text-[var(--heading-color)]" />
             </button>
 
             <div
               onClick={() => setmenu((prev) => !prev)}
               className="div3  cursor-pointer hover:text-black hover:scale-105"
             >
-              <CiMenuFries className="md:hidden" />
+              <CiMenuFries className="md:hidden hover:text-[var(--heading-color)]" />
             </div>
           </div>
 
@@ -231,9 +260,9 @@ const Navbar = () => {
                     location.pathname === "/"
                       ? "text-[var(--main-color)] text-3xl"
                       : "text-2xl"
-                  } hover:text-black  flex gap-6 justify-center items-center  `}
+                  } hover:text-[var(--heading-color)]  flex gap-6 justify-center items-center  `}
                 >
-                  <IoHomeOutline />
+                  <IoHomeOutline className="font-thin" />
                   <span>Home</span>
                 </Link>
                 <Link
@@ -243,7 +272,7 @@ const Navbar = () => {
                     location.pathname === "/Collections"
                       ? "text-[var(--main-color)] text-3xl"
                       : "text-2xl"
-                  } hover:text-black flex gap-6 justify-center items-center   `}
+                  } hover:text-[var(--heading-color)] flex gap-6 justify-center items-center   `}
                 >
                   <PiCardsThin /> <span>Collections</span>
                 </Link>
@@ -254,9 +283,9 @@ const Navbar = () => {
                     location.pathname === "/About"
                       ? "text-[var(--main-color)] text-3xl"
                       : "text-2xl"
-                  } hover:text-black flex gap-6 justify-center items-center `}
+                  } hover:text-[var(--heading-color)] flex gap-6 justify-center items-center `}
                 >
-                  <BsCreditCard2Front />
+                  <BsCreditCard2Front className="font-thin"/>
                   <span>About</span>
                 </Link>
                 <Link
@@ -266,7 +295,7 @@ const Navbar = () => {
                     location.pathname === "/Contact"
                       ? "text-[var(--main-color)] text-3xl"
                       : "text-2xl"
-                  } hover:text-black  flex gap-6 justify-center items-center  `}
+                  } hover:text-[var(--heading-color)]  flex gap-6 justify-center items-center  `}
                 >
                   <PiPhoneTransferThin /> <span>Contact</span>
                 </Link>

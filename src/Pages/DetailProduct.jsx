@@ -99,7 +99,8 @@ const DetailProduct = () => {
     <>
       <Link
         to={"/Collections"}
-        className="w-full  text-sm  flex flex-nowrap justify-start items-center gap-2 text-gray-500 hover:text-black hover:font-semibold"
+        className="w-full  text-sm  flex flex-nowrap justify-start items-center gap-2 text-gray-500 
+        hover:text-[var(--heading-color)] font-semibold"
       >
         <BiArrowBack /> Back to Collection
       </Link>
@@ -181,11 +182,11 @@ const DetailProduct = () => {
             {/* Name */}
             <div className="Name md:flex-col">
               <h4 className="text-gray-300 text-xs">Product Name:</h4>
-              <h2>{item.name}</h2>
+              <h2 className="text-[var(--heading-color)]">{item.name}</h2>
             </div>
             {/* Discription for AFTER Medium screen: */}
             <div className=" flex-col hidden md:block">
-              <h4 className="text-black text-xl">Discription:</h4>
+              <h4 className="text-[var(--heading-color)] text-xl">Discription:</h4>
               <p className="text-justify text-sm text-gray-500 font-sans">
                 {item.description}
               </p>
@@ -193,7 +194,7 @@ const DetailProduct = () => {
 
             {/* Sizes: */}
             <div className=" flex-col md:my-2">
-              <h4 className="text-black text-xl">Sizes:</h4>
+              <h4 className="text-[var(--heading-color)] text-xl">Sizes:</h4>
               <div className="allSizes flex justify-center items-center text-xl gap-3">
                 {item.sizes.map((size, index) => (
                   <input
@@ -213,7 +214,7 @@ const DetailProduct = () => {
 
             {/* Quantity */}
             <div className=" flex flex-row gap-3 justify-center items-center ">
-              <h4 className="text-black text-xl">Quantity:</h4>
+              <h4 className="text-[var(--heading-color)] text-xl">Quantity:</h4>
             </div>
 
             {/*quantity Buttons */}
@@ -233,7 +234,7 @@ const DetailProduct = () => {
                 type="number"
                 value={qty}
                 readOnly
-                className="w-[2ch] px-1 text-center outline-none select-none cursor-default"
+                className="w-[2ch] px-1 text-center text-[var(--heading-color)] outline-none select-none cursor-default"
               />
 
               <button

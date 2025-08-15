@@ -99,9 +99,9 @@ const Collections = () => {
               onClick={() => setfilterBOX((prev) => !prev)}
               className={` flex w-full gap-3 justify-start items-center flex-nowrap  text-xl md:cursor-pointer`}
             >
-              <h1>Filter</h1>
+              <h1 className="text-[var(--heading-color)]">Filter</h1>
               <MdOutlineKeyboardArrowRight
-                className={`${
+                className={`text-[var(--heading-color)] ${
                   filterBOX ? "rotate-90 transition-all duration-200" : ""
                 }`}
               />
@@ -118,7 +118,7 @@ const Collections = () => {
                     type="checkbox"
                     onChange={() => categoryHandler("Men")}
                   />
-                  <h1 className="group-hover:text-[var(--main-color)]">Men</h1>
+                  <h1 className="group-hover:text-[var(--main-color)] text-[var(--heading-color)]">Men</h1>
                 </label>
 
                 <label className="flex gap-1 group cursor-pointer">
@@ -126,7 +126,7 @@ const Collections = () => {
                     type="checkbox"
                     onChange={() => categoryHandler("Women")}
                   />
-                  <h1 className="group-hover:text-[var(--main-color)]">
+                  <h1 className="group-hover:text-[var(--main-color)] text-[var(--heading-color)]">
                     Women
                   </h1>
                 </label>
@@ -136,7 +136,7 @@ const Collections = () => {
                     type="checkbox"
                     onChange={() => categoryHandler("Kid")}
                   />
-                  <h1 className="group-hover:text-[var(--main-color)]">Kid</h1>
+                  <h1 className="group-hover:text-[var(--main-color)] text-[var(--heading-color)]">Kid</h1>
                 </label>
               </div>
             </div>
@@ -147,7 +147,7 @@ const Collections = () => {
                 srchInputFromStore.length > 0 ? "hidden" : "block"
               }  ${
                 PricefilterBOX ? "mb-30" : "mb-0"
-              } outline-0 mt-3 cursor-pointer border-0  rounded-sm py-5 `}
+              } outline-0 mt-3 cursor-pointer border-0 text-[var(--heading-color)]  rounded-sm py-5 `}
               onChange={(e) => sortHandler(e.target.value)}
               onClick={() => filterByPriceBOX()}
             >

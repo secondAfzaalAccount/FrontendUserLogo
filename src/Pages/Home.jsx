@@ -5,7 +5,7 @@ import LatestCollection from "../Components/LatestCollection";
 import { gsap } from "gsap";
 
 const Home = () => {
-  const text = "Best Clothing Store.";
+  const text = "Best-Clothing-Store.";
   const HeroRef = useRef([]);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className=" py-2 sm:py-4  w-full  px-4  ">
+    <div className="  py-2 sm:py-4  w-full  px-4  ">
       <div className="HERO h-[70vh]">
         {" "}
         {/* Hero---------------- */}
@@ -29,7 +29,7 @@ const Home = () => {
           <h1>
             {text.split("").map((char, index) => (
               <span
-                className="font-[Rockybilly] text-base md:text-2xl lg:text-3xl whitespace-nowrap text-center"
+                className={`${char === '-'? 'text-transparent': '' } font-[Rockybilly] text-[var(--heading-color)] text-base md:text-2xl lg:text-3xl whitespace-nowrap text-center"`}
                 key={index}
                 ref={(el) => (HeroRef.current[index] = el)}
                 style={{ display: "inline-block" }}
@@ -41,6 +41,7 @@ const Home = () => {
 
           <h2></h2>
         </div>
+
         {/* ⬅➡️ right */}
         <div></div>
       </div>

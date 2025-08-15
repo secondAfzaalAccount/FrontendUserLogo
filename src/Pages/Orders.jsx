@@ -51,11 +51,11 @@ const Orders = () => {
   } else {
     return (
       <>
-        <div className="w-full min-h-screen p-4 flex flex-col  gap-2 bg-gray-50">
+        <div className="w-full min-h-screen p-4 flex flex-col  gap-2  bg-[var(--bg-color)]">
           <Title text1="Your" text2="Orders" />
 
           {userOrdersbyAPI.length === 0 ? (
-            <div className="text-gray-400 text-xl flex justify-center items-center w-full h-full">You don't have place any order yet!</div>
+            <div className="text-gray-400 text-xl flex justify-center items-center w-full h-full">"You haven't placed any orders yet!"</div>
 
           ) : (
             <div className="w-full h-full flex gap-2 flex-col">

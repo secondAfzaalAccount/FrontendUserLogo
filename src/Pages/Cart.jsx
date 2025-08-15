@@ -49,9 +49,9 @@ const Cart = () => {
         <div className="relative w-full min-h-dvh text-xl md:text-2xl    lg:flex-row">
           <Link
             to={"/Collections"}
-            className="absolute text-xl md:text-2xl  top-[5%] left-2 flex gap-2 justify-center items-center cursor-pointer hover:text-[var(--main-color)]"
+            className="absolute text-xl md:text-2xl  top-[5%] left-2 text-[var(--heading-color)] flex gap-2 justify-center items-center cursor-pointer hover:text-[var(--main-color)]"
           >
-            <IoIosArrowRoundBack /> Contine Shopping
+            <IoIosArrowRoundBack  className="text-[var(--heading-color)]"/> Contine Shopping
           </Link>
         <div className="w-full h-[70vh] md:h-[90vh] flex flex-col items-center justify-center gap-4 px-4 text-center">
   <h2 className="text-gray-500 text-lg md:text-2xl font-semibold">
@@ -83,14 +83,15 @@ const Cart = () => {
         </Link>
         <div className="w-full min-h-dvh  flex flex-col gap-2 lg:flex-row">
           {/* ⬅️ */}
-          <div className="left w-full lg:w-3/4 h-full  flex flex-col gap-3">
+          <div className="left w-full lg:w-3/4 h-full  flex flex-col md:gap-3">
             <Title text1={"Your"} text2={"Shoping Cart"} />
+           
             <h2 className="text-sm font-[MuckleyBold] tracking-widest text-gray-400">
               Total Items-{" "}
               <span className="font-sans font-semibold"> {TotalItems}</span>
             </h2>
 
-            <div className="w-full p-4 border-t-[1px] border-gray-300"></div>
+            <div className="w-full p-2 md:p-4 border-t-[1px] border-gray-300"></div>
             {Cart?.map((item, index) => (
               <div
                 key={item.id}
@@ -108,7 +109,7 @@ const Cart = () => {
 
                 {/* size, price, buttons */}
                 <div className="flex flex-col md:flex-row md:gap-6 lg:gap-20 justify-around items-center ">
-                  <h2 className="relative  m-4 min-w-4">
+                  <h2 className="relative  m-4 min-w-4 text-[var(--heading-color)]">
                     {item?.Sizes}
                     <span className="text-xs  text-gray-300 absolute left-[-250%] md:left-[-100%] md:top-[-100%]">
                       Size:
@@ -140,7 +141,7 @@ const Cart = () => {
                         className={`${
                           item.Sizes === "S"
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
-                            : "text-black"
+                            : "text-[var(--heading-color)]"
                         } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
                         ${item.sizes.includes('S') ? '' : 'hidden'}`}
                       >
@@ -154,7 +155,7 @@ const Cart = () => {
                         className={`${
                           item.Sizes === "M"
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
-                            : "text-black"
+                            : "text-[var(--heading-color)]"
                         } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px]
                         ${item.sizes.includes('M') ? '' : 'hidden'}`}
                       >
@@ -168,7 +169,7 @@ const Cart = () => {
                         className={`${
                           item.Sizes === "L"
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
-                            : "text-black"
+                            : "text-[var(--heading-color)]"
                         } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
                         ${item.sizes.includes('L') ? '' : 'hidden'}`}
                       >
@@ -182,7 +183,7 @@ const Cart = () => {
                         className={`${
                           item.Sizes === "XL"
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
-                            : "text-black"
+                            : "text-[var(--heading-color)]"
                         } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
                         ${item.sizes.includes('XL') ? '' : 'hidden'}`}
                       >
@@ -196,7 +197,7 @@ const Cart = () => {
                         className={`${
                           item.Sizes === "XXL"
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
-                            : "text-black"
+                            : "text-[var(--heading-color)]"
                         } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
                         ${item.sizes.includes('XXL') ? '' : 'hidden'}`}
                       >
@@ -210,7 +211,7 @@ const Cart = () => {
                         className={`${
                           item.Sizes === "3XL"
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
-                            : "text-black"
+                            : "text-[var(--heading-color)]"
                         } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
                         ${item.sizes.includes('3XL') ? '' : 'hidden'}`}
                       >
@@ -248,7 +249,7 @@ const Cart = () => {
                     </button>
                   </div>
                   {/* price */}
-                  <h2 className="font-semibold w-[80px] my-4">
+                  <h2 className="font-semibold w-[80px] text-[var(--heading-color)] my-4">
                     Rs.{Math.floor(item.price * item.quantity)}/-
                   </h2>
                 </div>
@@ -268,7 +269,7 @@ const Cart = () => {
           <div className="right w-full lg:w-1/4   h-full  flex gap-3 flex-col px-4">
             <Title text1={"Grand"} text2={"Total"} />
 
-            <div className="bg-white px-6 md:py-8 py-4 md:h-[50vh] border-t border-gray-300 flex flex-col justify-center items-start gap-5 shadow-inner rounded-t-2xl md:gap-6">
+            <div className="bg-white px-6 md:py-8 py-1 md:h-[50vh]  border-t border-gray-300 flex flex-col justify-center items-start md:gap-5 shadow-inner rounded-t-2xl md:gap-6">
               <div className="w-full flex flex-wrap  lg:flex-row justify-between text-gray-700 text-lg lg:text-xl font-medium">
                 <span className="flex flex-nowrap md:flex-wrap lg:flex-row justify-between">
                   Total:
@@ -281,7 +282,7 @@ const Cart = () => {
                 <span>Rs.{delideliverFee}/-</span>
               </div>
 
-              <div className="w-full flex  flex-nowrap md:flex-wrap lg:flex-row gap-2 justify-between border-t pt-4 text-black text-xl lg:text-2xl font-bold">
+              <div className="w-full flex  flex-nowrap md:flex-wrap lg:flex-row gap-2  justify-between border-t pt-4 text-black text-xl lg:text-2xl font-bold">
                 <span className="whitespace-nowrap">Grand Total:</span>
                 <span>Rs.{Math.floor(GrandTotal + delideliverFee)}/-</span>
               </div>
