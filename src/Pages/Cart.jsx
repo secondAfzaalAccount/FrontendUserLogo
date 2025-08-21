@@ -14,8 +14,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io"; //icon
 import { CiEdit } from "react-icons/ci"; //icon
 import { BiArrowBack } from "react-icons/bi"; //icon
+import { toast } from "react-toastify";
 
 const Cart = () => {
+  const [token, settoken] = useState("");
   const Cart = useSelector((state) => state.mySlice.Cart);
   const [sizeEditorId, setsizeEditorId] = useState(null);
   const location = useLocation();
@@ -28,6 +30,10 @@ const Cart = () => {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
+  useEffect(() => {
+    const getToken = localStorage.getItem("token");
+    settoken(getToken);
+  }, []);
 
   const deleteHandler = (id) => {
     //delte from cart
@@ -39,8 +45,13 @@ const Cart = () => {
   };
 
   const checkoutHandler = () => {
-    dispatch(GrandTotalAmount(Math.floor(GrandTotal + delideliverFee)));
-    navigate("/DeliveryAddress");
+    if (!token) {
+      toast.info("login please.");
+      navigate("/login", { state: "Cart" });
+    }else{
+      dispatch(GrandTotalAmount(Math.floor(GrandTotal + delideliverFee)));
+      navigate("/DeliveryAddress");
+    }
   };
 
   if (Cart.length === 0 || Cart === NaN) {
@@ -51,24 +62,24 @@ const Cart = () => {
             to={"/Collections"}
             className="absolute text-xl md:text-2xl  top-[5%] left-2 text-[var(--heading-color)] flex gap-2 justify-center items-center cursor-pointer hover:text-[var(--main-color)]"
           >
-            <IoIosArrowRoundBack  className="text-[var(--heading-color)]"/> Contine Shopping
+            <IoIosArrowRoundBack className="text-[var(--heading-color)]" />{" "}
+            Contine Shopping
           </Link>
-        <div className="w-full h-[70vh] md:h-[90vh] flex flex-col items-center justify-center gap-4 px-4 text-center">
-  <h2 className="text-gray-500 text-lg md:text-2xl font-semibold">
-    🛒 Oops! Your cart's emptier than our weekend plans 😅
-  </h2>
-  <h2 className="text-gray-400 text-base md:text-lg">
-    keep shopping and fill it up!
-  </h2>
-  <div className="w-24 h-24 md:w-32 md:h-32 mt-2">
-    <img
-      src="images/shoppingBag.png"
-      alt="Shopping Bag"
-      className="w-full h-full object-contain animate-bounce"
-    />
-  </div>
-</div>
-
+          <div className="w-full h-[70vh] md:h-[90vh] flex flex-col items-center justify-center gap-4 px-4 text-center">
+            <h2 className="text-gray-500 text-lg md:text-2xl font-semibold">
+              🛒 Oops! Your cart's emptier than our weekend plans 😅
+            </h2>
+            <h2 className="text-gray-400 text-base md:text-lg">
+              keep shopping and fill it up!
+            </h2>
+            <div className="w-24 h-24 md:w-32 md:h-32 mt-2">
+              <img
+                src="images/shoppingBag.png"
+                alt="Shopping Bag"
+                className="w-full h-full object-contain animate-bounce"
+              />
+            </div>
+          </div>
         </div>
       </>
     );
@@ -85,7 +96,7 @@ const Cart = () => {
           {/* ⬅️ */}
           <div className="left w-full lg:w-3/4 h-full  flex flex-col md:gap-3">
             <Title text1={"Your"} text2={"Shoping Cart"} />
-           
+
             <h2 className="text-sm font-[MuckleyBold] tracking-widest text-gray-400">
               Total Items-{" "}
               <span className="font-sans font-semibold"> {TotalItems}</span>
@@ -118,11 +129,7 @@ const Cart = () => {
                     <span
                       className={`absolute right-[-150%] top-[20%] cursor-pointer text-gray-300 hover:text-gray-700`}
                     >
-                      <CiEdit
-                        onClick={() =>
-                          setsizeEditorId(item._id)
-                        }
-                      />
+                      <CiEdit onClick={() => setsizeEditorId(item._id)} />
                     </span>
 
                     <div
@@ -143,13 +150,13 @@ const Cart = () => {
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
                             : "text-[var(--heading-color)]"
                         } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
-                        ${item.sizes.includes('S') ? '' : 'hidden'}`}
+                        ${item.sizes.includes("S") ? "" : "hidden"}`}
                       >
                         S
                       </h3>
                       <h3
                         onClick={() => {
-                           dispatch(editSize({ id: item._id, size: "M" }));
+                          dispatch(editSize({ id: item._id, size: "M" }));
                           setsizeEditorId(null);
                         }}
                         className={`${
@@ -157,7 +164,7 @@ const Cart = () => {
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
                             : "text-[var(--heading-color)]"
                         } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px]
-                        ${item.sizes.includes('M') ? '' : 'hidden'}`}
+                        ${item.sizes.includes("M") ? "" : "hidden"}`}
                       >
                         M
                       </h3>
@@ -171,13 +178,13 @@ const Cart = () => {
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
                             : "text-[var(--heading-color)]"
                         } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
-                        ${item.sizes.includes('L') ? '' : 'hidden'}`}
+                        ${item.sizes.includes("L") ? "" : "hidden"}`}
                       >
                         L
                       </h3>
-                       <h3
+                      <h3
                         onClick={() => {
-                           dispatch(editSize({ id: item._id, size: "XL" }));
+                          dispatch(editSize({ id: item._id, size: "XL" }));
                           setsizeEditorId(null);
                         }}
                         className={`${
@@ -185,13 +192,13 @@ const Cart = () => {
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
                             : "text-[var(--heading-color)]"
                         } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
-                        ${item.sizes.includes('XL') ? '' : 'hidden'}`}
+                        ${item.sizes.includes("XL") ? "" : "hidden"}`}
                       >
                         XL
                       </h3>
                       <h3
                         onClick={() => {
-                           dispatch(editSize({ id: item._id, size: "XXL" }));
+                          dispatch(editSize({ id: item._id, size: "XXL" }));
                           setsizeEditorId(null);
                         }}
                         className={`${
@@ -199,13 +206,13 @@ const Cart = () => {
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
                             : "text-[var(--heading-color)]"
                         } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
-                        ${item.sizes.includes('XXL') ? '' : 'hidden'}`}
+                        ${item.sizes.includes("XXL") ? "" : "hidden"}`}
                       >
                         XXL
                       </h3>
                       <h3
                         onClick={() => {
-                           dispatch(editSize({ id: item._id, size: "3XL" }));
+                          dispatch(editSize({ id: item._id, size: "3XL" }));
                           setsizeEditorId(null);
                         }}
                         className={`${
@@ -213,11 +220,10 @@ const Cart = () => {
                             ? "border-[1px] border-[var(--main-color)] text-[var(--main-color)]"
                             : "text-[var(--heading-color)]"
                         } cursor-pointer sizeOpt py-2 px-4 hover:text-[var(--main-color)] text-base rounded-[16px] 
-                        ${item.sizes.includes('3XL') ? '' : 'hidden'}`}
+                        ${item.sizes.includes("3XL") ? "" : "hidden"}`}
                       >
                         3XL
                       </h3>
-                     
                     </div>
                   </h2>
 

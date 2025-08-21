@@ -222,7 +222,7 @@ const Navbar = () => {
               } md:bg-red-500 text-xl  hover:shadow-2xl cursor-pointer hover:scale-105 text-gray-500  md:text-white rounded-md px-4 py-2  text-balance flex justify-center items-center gap-3`}
             >
               <h1 className="hidden md:block">Logout</h1>
-              <IoLogOutOutline className="md:text-2xl hover:text-[var(--heading-color)]" />
+              <IoLogOutOutline className="md:text-2xl " />
             </button>
 
             <div

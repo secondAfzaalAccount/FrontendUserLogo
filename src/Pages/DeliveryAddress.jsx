@@ -209,7 +209,7 @@ const DeliveryAddress = () => {
             {/* Payment Method Selection */}
 
             {/* Easy Paisa //TODO:*/} 
-            <div className="flex gap-3 mt-6 hidden">
+            <div className=" gap-3 mt-6 hidden">
               <div
                 onClick={() => setMethod("easyPaisa")}
                 className="flex cursor-pointer  py-2 items-center w-2/4 h-14 rounded justify-center px-2 gap-1 border border-gray-300 flex-row"

@@ -16,6 +16,8 @@ const Login = () => {
   const [password, setpassword] = useState();
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(location.state);
+
   const dispatch = useDispatch();
 
   const [login, setlogin] = useState(true); //true means Login in
@@ -67,7 +69,9 @@ const Login = () => {
           });
 
           //if user come from Delivery order page
-          if (location.state === "checkingOut") {
+          if (location.state === "Cart") {
+            navigate("/Cart");
+          } else if (location.state === "checkingOut") {
             navigate("/DeliveryAddress");
           } else {
             navigate("/");
@@ -111,6 +115,8 @@ const Login = () => {
                 pauseOnHover: false,
               },
             });
+          } else if (location.state === "Cart") {
+            navigate("/Cart");
           } else {
             navigate("/");
             // toast.success((`🎉 Welcome back! ${response.data.createUser.name}`), {
@@ -177,7 +183,7 @@ const Login = () => {
               required
               placeholder="Email"
               className={` w-full px-4 py-2 outline-0 rounded-xl`}
-                style={{
+              style={{
                 background: "#EDF2F4",
                 boxShadow: document.documentElement.classList.contains("dark")
                   ? "6px 6px 12px #b0b0b0, -6px -6px 12px #ffffff" // softer shadow for dark mode
@@ -188,7 +194,7 @@ const Login = () => {
             {/* ---------Password + (eye icon) */}
             <div
               className="flex justify-between px-4 py-2 items-center gap-2 rounded-xl w-full "
-                style={{
+              style={{
                 background: "#EDF2F4",
                 boxShadow: document.documentElement.classList.contains("dark")
                   ? "6px 6px 12px #b0b0b0, -6px -6px 12px #ffffff" // softer shadow for dark mode

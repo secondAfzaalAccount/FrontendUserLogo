@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ProductDisplay from "../Components/ProductDisplay";
 import Title from "./../Components/Title.jsx";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md"; //icon
 import { BiArrowBack } from "react-icons/bi"; //icon
 import { Link } from "react-router-dom";
